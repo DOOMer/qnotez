@@ -51,4 +51,8 @@ public class NoteModel {
     public Date getUpdated() {
         return updated;
     }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 }
