@@ -4,7 +4,7 @@ import java.util.Date;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverters;
 
 @Entity(tableName = "notes")
 public class NoteModel {
@@ -14,9 +14,9 @@ public class NoteModel {
     private String title;
     private String text;
 
-//    @TypeConverter(DateConverter.class)
+    @TypeConverters(DateConverter.class)
     private Date created;
-//    @TypeConverter(DateConverter.class)
+    @TypeConverters(DateConverter.class)
     private Date updated;
 
     public NoteModel(String title, String text, Date created) {
