@@ -6,8 +6,10 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 
-@Entity(tableName = "notes")
+@Entity(tableName = NoteModel.TABLE_NAME)
 public class NoteModel {
+    public static final String TABLE_NAME = "notes";
+
     @PrimaryKey(autoGenerate = true)
     public int id;
 
