@@ -1,10 +1,20 @@
 package org.doomer.qnotez;
 
+import android.arch.lifecycle.LifecycleActivity;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.support.annotation.Nullable;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,15 +23,35 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import org.doomer.qnotez.adapters.RecyclerViewAdapter;
+import org.doomer.qnotez.db.AppDatabase;
+import org.doomer.qnotez.db.NoteModel;
+import org.doomer.qnotez.viewmodel.NoteListViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MainActivity extends LifecycleActivity
+        implements NavigationView.OnNavigationItemSelectedListener, OnLongClickListener {
+
+    private NoteListViewModel viewModel;
+    private RecyclerViewAdapter recyclerViewAdapter;
+
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -29,6 +59,21 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+
+        recyclerViewAdapter = new RecyclerViewAdapter(new ArrayList<NoteModel>(), this);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(recyclerViewAdapter);
+
+        viewModel = ViewModelProviders.of(this).get(NoteListViewModel.class);
+
+        // load items and make observer
+        viewModel.getNoteItems().observe(MainActivity.this, new Observer<List<NoteModel>>() {
+            @Override
+            public void onChanged(@Nullable List<NoteModel> noteItems) {
+                recyclerViewAdapter.addItems(noteItems);
             }
         });
 
@@ -40,6 +85,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppDatabase.destroyInstance();
     }
 
     @Override
@@ -96,6 +147,13 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        NoteModel note = (NoteModel) view.getTag();
+        viewModel.deleteItem(note);
         return true;
     }
 }
