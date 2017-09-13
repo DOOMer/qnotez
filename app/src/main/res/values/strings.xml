@@ -5,4 +5,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_note_add">NoteAddActivity</string>
+    <string name="edit_note_title">Title&#8230;</string>
+    <string name="edit_note_text">Text&#8230;</string>
+    <string name="warning_emty_text">Text can\'t be empty!</string>
 </resources>

@@ -57,8 +57,8 @@ public class MainActivity extends LifecycleActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            Intent inAdd = new Intent(MainActivity.this, NoteAddActivity.class);
+            startActivity(inAdd);
             }
         });
 
