@@ -10,6 +10,7 @@ import org.doomer.qnotez.R;
 import org.doomer.qnotez.db.NoteModel;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 
@@ -55,8 +56,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.txtText.setText(note.getText());
         holder.txtTitle.setText(note.getTitle());
 
-        // make formating date
-        String createdString = DateFormat.getDateInstance().format(note.getCreated());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy k:mm");
+        String createdString = sdf.format(note.getCreated());
+
         holder.txtCreated.setText(createdString);
 
         holder.itemView.setTag(note);
