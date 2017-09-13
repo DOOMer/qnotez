@@ -1,6 +1,7 @@
 package org.doomer.qnotez;
 
-import android.arch.lifecycle.LifecycleActivity;
+import android.arch.lifecycle.LifecycleRegistry;
+import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -8,7 +9,6 @@ import android.support.annotation.Nullable;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -34,8 +34,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends LifecycleActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnLongClickListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, OnLongClickListener,
+        LifecycleRegistryOwner {
+
+    private LifecycleRegistry registryOwnder = new LifecycleRegistry(this);
 
     private NoteListViewModel viewModel;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -85,6 +88,11 @@ public class MainActivity extends LifecycleActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public LifecycleRegistry getLifecycle() {
+        return registryOwnder;
     }
 
     @Override
