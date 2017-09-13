@@ -16,7 +16,7 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 @TypeConverters(DateConverter.class)
 public interface NoteDao {
 
-    @Query("SELECT * FROM " + NoteModel.TABLE_NAME)
+    @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " ORDER BY updated DESC")
     LiveData<List<NoteModel>> getAllItems();
 
     @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE id = :id")
