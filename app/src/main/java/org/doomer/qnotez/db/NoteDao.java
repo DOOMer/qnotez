@@ -6,6 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.TypeConverters;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ public interface NoteDao {
 
     @Insert(onConflict = REPLACE)
     void addItem(NoteModel item);
+
+    @Update
+    void updateItem(NoteModel item);
 
     @Delete
     void deleteItem(NoteModel item);
