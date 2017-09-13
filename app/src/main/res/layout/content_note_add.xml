@@ -14,23 +14,25 @@
         android:id="@+id/edit_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/edit_note_title"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
 
     <EditText
         android:id="@+id/edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="364dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="48dp"
         android:ems="10"
         android:gravity="top"
         android:hint="@string/edit_note_text"
@@ -38,17 +40,20 @@
         app:layout_constraintBottom_toTopOf="@+id/txt_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_title"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="57dp" />
 
     <TextView
         android:id="@+id/txt_date"
-        android:layout_width="0dp"
+        android:layout_width="344dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="23dp"
         android:layout_marginStart="8dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="469dp" />
 </android.support.constraint.ConstraintLayout>
