@@ -1,6 +1,7 @@
 package org.doomer.qnotez.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
 
     private List<NoteModel> noteModelList;
+    private View.OnClickListener clickListener;
     private View.OnLongClickListener longClickListener;
 
 
@@ -27,18 +29,38 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
+//            itemView.setOnClickListener(this);
 
             // TODO replace to butter knife
             txtText = (TextView) itemView.findViewById(R.id.itemText);
             txtTitle = (TextView) itemView.findViewById(R.id.titleView);
             txtCreated = (TextView) itemView.findViewById(R.id.createdView);
         }
+
+//        @Override
+//        public void onClick(View view) {
+//            int position = getAdapterPosition();
+//
+//            if (position != RecyclerView.NO_POSITION) {
+//                Log.d("ZZZZ", String.valueOf(position));
+//
+//                NoteModel note = (NoteModel) view.getTag();
+//                Log.d("ZZZZ", String.valueOf(note.id));
+//                Log.d("ZZZZ", note.getTitle());
+//
+//                // Intent i =
+//
+//            }
+//        }
     }
 
 
-    public RecyclerViewAdapter(List<NoteModel> list, View.OnLongClickListener listener) {
+    public RecyclerViewAdapter(List<NoteModel> list,
+                               View.OnClickListener listener,
+                               View.OnLongClickListener longListener) {
         noteModelList = list;
-        longClickListener = listener;
+        clickListener = listener;
+        longClickListener = longListener;
     }
 
     @Override
@@ -62,6 +84,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.txtCreated.setText(createdString);
 
         holder.itemView.setTag(note);
+        holder.itemView.setOnClickListener(clickListener);
         holder.itemView.setOnLongClickListener(longClickListener);
     }
 
@@ -74,4 +97,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         noteModelList = noteList;
         notifyDataSetChanged();
     }
+
+
 }

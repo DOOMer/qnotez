@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -35,7 +36,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnLongClickListener,
+        implements NavigationView.OnNavigationItemSelectedListener,
+        OnClickListener, OnLongClickListener,
         LifecycleRegistryOwner {
 
     private LifecycleRegistry registryOwnder = new LifecycleRegistry(this);
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        recyclerViewAdapter = new RecyclerViewAdapter(new ArrayList<NoteModel>(), this);
+        recyclerViewAdapter = new RecyclerViewAdapter(new ArrayList<NoteModel>(), this, this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerViewAdapter);
@@ -163,5 +165,10 @@ public class MainActivity extends AppCompatActivity
         NoteModel note = (NoteModel) view.getTag();
         viewModel.deleteItem(note);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        
     }
 }
