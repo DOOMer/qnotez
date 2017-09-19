@@ -1,6 +1,7 @@
 package org.doomer.qnotez.db;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Delete;
@@ -20,7 +21,7 @@ public interface NoteDao {
     LiveData<List<NoteModel>> getAllItems();
 
     @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE id = :id")
-    LiveData<NoteModel> getItem(String id);
+    NoteModel getItem(String id);
 
     @Insert(onConflict = REPLACE)
     void addItem(NoteModel item);

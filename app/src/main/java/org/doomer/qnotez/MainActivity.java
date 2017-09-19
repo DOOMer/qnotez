@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +169,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-        
+        NoteModel note = (NoteModel) view.getTag();
+        Intent di = new Intent(this, NoteDetailActivity.class);
+        di.putExtra(NoteDetailActivity.KEY_NOTE_ID, note.id);
+        startActivity(di);
     }
 }

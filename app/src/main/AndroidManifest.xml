@@ -28,6 +28,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.doomer.qnotez.MainActivity" />
         </activity>
+        <activity
+            android:name=".NoteDetailActivity"
+            android:label="@string/title_activity_note_detail"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.doomer.qnotez.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
