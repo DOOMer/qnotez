@@ -10,10 +10,11 @@ import android.widget.TextView;
 import org.doomer.qnotez.R;
 import org.doomer.qnotez.db.NoteModel;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
 
@@ -23,35 +24,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     static class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtTitle;
-        private TextView txtText;
-        private TextView txtCreated;
+        @BindView(R.id.item_title)
+        protected TextView txtTitle;
+
+        @BindView(R.id.item_text)
+        protected TextView txtText;
+
+        @BindView(R.id.item_updated)
+        protected TextView txtUpdated;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
-//            itemView.setOnClickListener(this);
-
-            // TODO replace to butter knife
-            txtText = (TextView) itemView.findViewById(R.id.itemText);
-            txtTitle = (TextView) itemView.findViewById(R.id.titleView);
-            txtCreated = (TextView) itemView.findViewById(R.id.createdView);
+            ButterKnife.bind(this, itemView);
         }
-
-//        @Override
-//        public void onClick(View view) {
-//            int position = getAdapterPosition();
-//
-//            if (position != RecyclerView.NO_POSITION) {
-//                Log.d("ZZZZ", String.valueOf(position));
-//
-//                NoteModel note = (NoteModel) view.getTag();
-//                Log.d("ZZZZ", String.valueOf(note.id));
-//                Log.d("ZZZZ", note.getTitle());
-//
-//                // Intent i =
-//
-//            }
-//        }
     }
 
 
@@ -79,9 +64,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.txtTitle.setText(note.getTitle());
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy k:mm");
-        String createdString = sdf.format(note.getCreated());
+        String createdString = sdf.format(note.getUpdated());
 
-        holder.txtCreated.setText(createdString);
+        holder.txtUpdated.setText(createdString);
 
         holder.itemView.setTag(note);
         holder.itemView.setOnClickListener(clickListener);
