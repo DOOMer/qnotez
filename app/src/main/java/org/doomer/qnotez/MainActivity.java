@@ -31,6 +31,7 @@ import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.viewmodel.NoteListViewModel;
 import org.doomer.qnotez.utils.Dialogs;
+import org.doomer.qnotez.utils.NoteUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -188,6 +189,9 @@ public class MainActivity extends AppCompatActivity
                     }
                     break;
                 case NoteActions.ACTION_SHARE:
+                    if (selectedItem != null) {
+                        NoteUtils.shareNote(selectedItem, MainActivity.this);
+                    }
                     break;
                 case NoteActions.ACTION_DELETE:
                     if (selectedItem != null) {
