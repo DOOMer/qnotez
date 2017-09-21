@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -25,15 +26,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import org.doomer.qnotez.adapters.RecyclerViewAdapter;
+import org.doomer.qnotez.consts.NoteActions;
 import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.viewmodel.NoteListViewModel;
+import org.doomer.qnotez.utils.Dialogs;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.MaterialDialog.ListCallback;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -42,6 +48,7 @@ public class MainActivity extends AppCompatActivity
 
     private LifecycleRegistry registryOwnder = new LifecycleRegistry(this);
 
+    private NoteModel selectedItem;
     private NoteListViewModel viewModel;
     private RecyclerViewAdapter recyclerViewAdapter;
 
@@ -162,16 +169,44 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onLongClick(View view) {
-        NoteModel note = (NoteModel) view.getTag();
-        viewModel.deleteItem(note);
+        selectedItem = (NoteModel) view.getTag();
+
+        MaterialDialog itemMenu = Dialogs.createListDialog(this, R.id.item_title,
+                R.array.item_action_names, itemSelectCallback);
+        itemMenu.show();
         return true;
     }
+
+    private MaterialDialog.ListCallback itemSelectCallback = new ListCallback() {
+        @Override
+        public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+
+            switch (position) {
+                case NoteActions.ACTION_VIEW:
+                    if (selectedItem != null) {
+                        editItem(selectedItem.id);
+                    }
+                    break;
+                case NoteActions.ACTION_SHARE:
+                    break;
+                case NoteActions.ACTION_DELETE:
+                    if (selectedItem != null) {
+                        viewModel.deleteItem(selectedItem);
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onClick(View view) {
         NoteModel note = (NoteModel) view.getTag();
+        editItem(note.id);
+    }
+
+    private void editItem(int id) {
         Intent di = new Intent(this, NoteDetailActivity.class);
-        di.putExtra(NoteDetailActivity.KEY_NOTE_ID, note.id);
+        di.putExtra(NoteDetailActivity.KEY_NOTE_ID, id);
         startActivity(di);
     }
 }
