@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -45,7 +46,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    compile ('com.afollestad.material-dialogs:commons:0.9.4.7') {
+    compile('com.afollestad.material-dialogs:commons:0.9.4.7') {
         exclude module: 'support-v13'
     }
 }
