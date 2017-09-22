@@ -155,6 +155,10 @@ public class MainActivity extends AppCompatActivity
                 navIntent = new Intent(MainActivity.this, InfoActivity.class);
                 break;
 
+            case R.id.nav_settings:
+                navIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                break;
+
             default:
                 navIntent = new Intent(MainActivity.this, InfoActivity.class);
         }
