@@ -15,4 +15,7 @@
     <string name="msg_note_saved">Saved...</string>
     <string name="txt_created">Created</string>
     <string name="txt_updated">Updated</string>
+    <string name="title_activity_info">Info</string>
+    <string name="txt_copyright" translatable="false">Copyright (c) 2017, Artem \"DOOMer\" Galichkin</string>
+    <string name="version">Version</string>
 </resources>
