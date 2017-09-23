@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="primaryColor">#26a69a</color>
+    <color name="primaryLightColor">#64d8cb</color>
+    <color name="primaryDarkColor">#00766c</color>
+    <color name="secondaryColor">#4db6ac</color>
+    <color name="secondaryLightColor">#82e9de</color>
+    <color name="secondaryDarkColor">#00867d</color>
+    <color name="primaryTextColor">#e0f7fa</color>
+    <color name="secondaryTextColor">#e0f2f1</color>
+
+
+    <!--colors for dark skin-->
+    <color name="dark_primaryColor">#212121</color>
+    <color name="dark_primaryLightColor">#484848</color>
+    <color name="dark_primaryDarkColor">#000000</color>
+    <color name="dark_primaryTextColor">#ffffff</color>
+    <color name="dark_secondaryColor">#4db6ac</color>
+    <color name="dark_secondaryLightColor">#82e9de</color>
+    <color name="dark_secondaryDarkColor">#00867d</color>
 </resources>
+
+<!--<resources>-->
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+<!--</resources>-->
