@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.viewmodel.NoteDetailViewModel;
+import org.doomer.qnotez.utils.ThemeChanger;
 
 import java.text.SimpleDateFormat;
 
@@ -44,6 +45,8 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeChanger.setFromSettings(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_add);
 

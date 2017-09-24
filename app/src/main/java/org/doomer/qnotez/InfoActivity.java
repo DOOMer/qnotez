@@ -11,6 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import org.doomer.qnotez.utils.ThemeChanger;
 import org.doomer.qnotez.utils.TextUtils;
 
 public class InfoActivity extends AppCompatActivity {
@@ -20,6 +21,8 @@ public class InfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeChanger.setFromSettings(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 

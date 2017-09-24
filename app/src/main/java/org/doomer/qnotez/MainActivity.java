@@ -32,6 +32,7 @@ import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.viewmodel.NoteListViewModel;
 import org.doomer.qnotez.utils.Dialogs;
 import org.doomer.qnotez.utils.NoteUtils;
+import org.doomer.qnotez.utils.ThemeChanger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeChanger.setFromSettings(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

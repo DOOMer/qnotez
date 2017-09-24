@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.viewmodel.NoteAddViewModel;
+import org.doomer.qnotez.utils.ThemeChanger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +32,8 @@ public class NoteAddActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeChanger.setFromSettings(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_add);
 
