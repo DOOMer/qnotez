@@ -1,10 +1,13 @@
 package org.doomer.qnotez;
 
+import android.app.SearchManager;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.Context;
+import android.content.SearchRecentSuggestionsProvider;
 import android.support.annotation.Nullable;
 
 import android.os.Bundle;
@@ -19,6 +22,8 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -45,7 +50,7 @@ import com.afollestad.materialdialogs.MaterialDialog.ListCallback;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        OnClickListener, OnLongClickListener,
+        OnClickListener, OnLongClickListener, OnQueryTextListener,
         LifecycleRegistryOwner {
 
     private LifecycleRegistry registryOwnder = new LifecycleRegistry(this);
@@ -56,6 +61,9 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @BindView(R.id.search_view)
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +109,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager sm = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView.setOnQueryTextListener(this);
     }
 
     @Override
@@ -217,5 +229,18 @@ public class MainActivity extends AppCompatActivity
         Intent di = new Intent(this, NoteDetailActivity.class);
         di.putExtra(NoteDetailActivity.KEY_NOTE_ID, id);
         startActivity(di);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Log.d("QQQQQQQ", "Query SUBMIT");
+//        viewModel.searchByText(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        Log.d("QQQQQQ", "Query TEXT CHANGED");
+        return false;
     }
 }
