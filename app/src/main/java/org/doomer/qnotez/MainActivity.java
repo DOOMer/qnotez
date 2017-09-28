@@ -3,23 +3,14 @@ package org.doomer.qnotez;
 import android.app.SearchManager;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.Context;
-import android.content.SearchRecentSuggestionsProvider;
-import android.support.annotation.Nullable;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
@@ -31,26 +22,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import org.doomer.qnotez.adapters.RecyclerViewAdapter;
-import org.doomer.qnotez.consts.NoteActions;
 import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;
+import org.doomer.qnotez.fragments.MainFragment;
 import org.doomer.qnotez.viewmodel.NoteListViewModel;
-import org.doomer.qnotez.utils.Dialogs;
-import org.doomer.qnotez.utils.NoteUtils;
 import org.doomer.qnotez.utils.ThemeChanger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.MaterialDialog.ListCallback;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        OnClickListener, OnLongClickListener, OnQueryTextListener,
+        OnQueryTextListener,
         LifecycleRegistryOwner {
 
     private LifecycleRegistry registryOwnder = new LifecycleRegistry(this);
@@ -59,8 +43,8 @@ public class MainActivity extends AppCompatActivity
     private NoteListViewModel viewModel;
     private RecyclerViewAdapter recyclerViewAdapter;
 
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
+//    @BindView(R.id.recycler_view)
+//    RecyclerView recyclerView;
 
     @BindView(R.id.search_view)
     SearchView searchView;
@@ -86,21 +70,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        recyclerViewAdapter = new RecyclerViewAdapter(new ArrayList<NoteModel>(), this, this);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(recyclerViewAdapter);
-
-        viewModel = ViewModelProviders.of(this).get(NoteListViewModel.class);
-
-        // load items and make observer
-        viewModel.getNoteItems().observe(MainActivity.this, new Observer<List<NoteModel>>() {
-            @Override
-            public void onChanged(@Nullable List<NoteModel> noteItems) {
-                recyclerViewAdapter.addItems(noteItems);
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -113,6 +82,9 @@ public class MainActivity extends AppCompatActivity
         // Associate searchable configuration with the SearchView
         SearchManager sm = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView.setOnQueryTextListener(this);
+
+        MainFragment mftg = new MainFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, mftg).commit();
     }
 
     @Override
@@ -183,52 +155,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public boolean onLongClick(View view) {
-        selectedItem = (NoteModel) view.getTag();
-
-        MaterialDialog itemMenu = Dialogs.createListDialog(this, R.id.item_title,
-                R.array.item_action_names, itemSelectCallback);
-        itemMenu.show();
-        return true;
-    }
-
-    private MaterialDialog.ListCallback itemSelectCallback = new ListCallback() {
-        @Override
-        public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
-
-            switch (position) {
-                case NoteActions.ACTION_VIEW:
-                    if (selectedItem != null) {
-                        editItem(selectedItem.id);
-                    }
-                    break;
-                case NoteActions.ACTION_SHARE:
-                    if (selectedItem != null) {
-                        NoteUtils.shareNote(selectedItem, MainActivity.this);
-                    }
-                    break;
-                case NoteActions.ACTION_DELETE:
-                    if (selectedItem != null) {
-                        viewModel.deleteItem(selectedItem);
-                    }
-                    break;
-            }
-        }
-    };
-
-    @Override
-    public void onClick(View view) {
-        NoteModel note = (NoteModel) view.getTag();
-        editItem(note.id);
-    }
-
-    private void editItem(int id) {
-        Intent di = new Intent(this, NoteDetailActivity.class);
-        di.putExtra(NoteDetailActivity.KEY_NOTE_ID, id);
-        startActivity(di);
     }
 
     @Override
