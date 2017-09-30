@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import org.doomer.qnotez.R;
 import org.doomer.qnotez.utils.ThemeChanger;
 
-/**
+/**Improvecode for adding fragments to main activity
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link SettingsFragment.OnFragmentInteractionListener} interface
