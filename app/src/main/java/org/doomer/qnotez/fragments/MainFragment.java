@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -34,6 +35,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainFragment extends Fragment implements OnClickListener, OnLongClickListener {
+
+    public static final String FRAGMENT_TAG = "MainFragment";
 
     private NoteModel selectedItem;
     private NoteListViewModel viewModel;

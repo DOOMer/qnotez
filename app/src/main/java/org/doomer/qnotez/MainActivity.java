@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.content.Context;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
@@ -26,6 +28,7 @@ import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.fragments.MainFragment;
 import org.doomer.qnotez.viewmodel.NoteListViewModel;
+import org.doomer.qnotez.utils.ActivityUtils;
 import org.doomer.qnotez.utils.ThemeChanger;
 
 import butterknife.BindView;
@@ -42,9 +45,6 @@ public class MainActivity extends AppCompatActivity
     private NoteModel selectedItem;
     private NoteListViewModel viewModel;
     private RecyclerViewAdapter recyclerViewAdapter;
-
-//    @BindView(R.id.recycler_view)
-//    RecyclerView recyclerView;
 
     @BindView(R.id.search_view)
     SearchView searchView;
@@ -83,8 +83,15 @@ public class MainActivity extends AppCompatActivity
         SearchManager sm = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView.setOnQueryTextListener(this);
 
-        MainFragment mftg = new MainFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, mftg).commit();
+        boolean ok = ActivityUtils.fragmentInLayout(getSupportFragmentManager(), MainFragment.FRAGMENT_TAG,
+                MainFragment.class);
+
+        if (!ok) {
+            MainFragment mftg = new MainFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_content, mftg, MainFragment.FRAGMENT_TAG)
+                    .commit();
+        }
     }
 
     @Override
