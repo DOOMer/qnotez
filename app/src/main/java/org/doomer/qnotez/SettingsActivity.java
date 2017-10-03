@@ -1,12 +1,9 @@
 package org.doomer.qnotez;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import org.doomer.qnotez.fragments.SettingsFragment;
 import org.doomer.qnotez.utils.ThemeChanger;
@@ -14,6 +11,7 @@ import org.doomer.qnotez.utils.ThemeChanger;
 public class SettingsActivity extends AppCompatActivity {
 
     public static boolean themeIsChanged = false;
+    public static boolean displayedRowsCountCHanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +33,15 @@ public class SettingsActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (!themeIsChanged) {
+                if (themeIsChanged || displayedRowsCountCHanged) {
+                    themeIsChanged = false;
+                    displayedRowsCountCHanged = false;
+                    return false;
+                } else {
                     finish();
                     return true;
-                } else {
-                    themeIsChanged = false;
-                    return false;
+
+
                 }
         }
 

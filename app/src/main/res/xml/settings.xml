@@ -6,6 +6,13 @@
             android:defaultValue="false">
 
         </SwitchPreference>
+        <ListPreference android:key="@string/settings_key_count_rows"
+            android:title="@string/settings_title_count_rows"
+            android:summary="@string/settings_summary_count_rows"
+            android:entries="@array/settings_display_count_rows_titles"
+            android:entryValues="@array/settings_display_count_rows_values"
+            android:defaultValue="-1" />
+
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/action_search">
         <ListPreference android:entries="@array/settings_quick_search_titles"

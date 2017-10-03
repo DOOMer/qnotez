@@ -1,5 +1,8 @@
 package org.doomer.qnotez.adapters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.doomer.qnotez.App;
 import org.doomer.qnotez.R;
 import org.doomer.qnotez.db.NoteModel;
 
@@ -59,8 +63,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         // get item from list by positin
         NoteModel note = noteModelList.get(position);
 
+        int rowCount = countOfDisplayedTextRows();
+        switch (rowCount) {
+            case 0:
+                holder.txtText.setVisibility(View.INVISIBLE);
+                break;
+            default:
+                break;
+        }
+
         // bind values to view in holder
-        holder.txtText.setText(note.getText());
+        if (rowCount != 0) {
+            holder.txtText.setText(note.getText());
+        }
+
         holder.txtTitle.setText(note.getTitle());
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy k:mm");
@@ -71,6 +87,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setTag(note);
         holder.itemView.setOnClickListener(clickListener);
         holder.itemView.setOnLongClickListener(longClickListener);
+    }
+
+    private int countOfDisplayedTextRows() {
+        Context ctx = App.getAppContext();
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
+        String key = ctx.getString(R.string.settings_key_count_rows);
+
+        return Integer.parseInt(sp.getString(key, "-1"));
     }
 
     @Override

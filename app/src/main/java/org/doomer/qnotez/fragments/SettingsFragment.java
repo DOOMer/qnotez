@@ -44,9 +44,9 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(getString(R.string.settings_key_darkskin)) ) {
-            SettingsActivity parent = (SettingsActivity) getActivity();
+        SettingsActivity parent = (SettingsActivity) getActivity();
 
+        if (key.equals(getString(R.string.settings_key_darkskin)) ) {
             parent.themeIsChanged = !parent.themeIsChanged;
 
             parent.finish();
@@ -56,6 +56,11 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
             final Intent intent = parent.getIntent();
 //             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
             parent.startActivity(intent);
+        }
+
+        if (key.equals(getString(R.string.settings_key_count_rows))) {
+            Log.d("ZZZZZZ", "roe count settings changed");
+            parent.displayedRowsCountCHanged = !parent.displayedRowsCountCHanged;
         }
     }
 

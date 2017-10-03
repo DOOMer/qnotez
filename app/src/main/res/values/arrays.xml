@@ -16,4 +16,13 @@
         <item>qs_text</item>
     </string-array>
 
+    <string-array name="settings_display_count_rows_titles">
+        <item>Full text</item>
+        <item>Only titles</item>
+    </string-array>
+
+    <string-array name="settings_display_count_rows_values">
+        <item>-1</item>
+        <item>0</item>
+    </string-array>
 </resources>
