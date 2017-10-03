@@ -7,4 +7,12 @@
 
         </SwitchPreference>
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/action_search">
+        <ListPreference android:entries="@array/settings_quick_search_titles"
+            android:entryValues="@array/settings_quick_search_values"
+            android:title="@string/settings_title_quick_search"
+            android:summary="@string/settings_summary_quick_search"
+            android:key="@string/settings_key_quick_search"
+            android:defaultValue="@string/settings_qs_by_text"/>
+    </PreferenceCategory>
 </PreferenceScreen>

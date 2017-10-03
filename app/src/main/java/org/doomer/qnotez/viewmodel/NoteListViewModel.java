@@ -6,8 +6,11 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.doomer.qnotez.App;
+import org.doomer.qnotez.R;
 import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;
+import org.doomer.qnotez.utils.NoteUtils;
 import org.doomer.qnotez.utils.TextUtils;
 
 import java.util.List;
@@ -61,7 +64,15 @@ public class NoteListViewModel extends AndroidViewModel {
 
         @Override
         protected LiveData<List<NoteModel>> doInBackground(String... strings) {
-            return db.getNoteModel().searchByTitile(strings[0]);
+            LiveData<List<NoteModel>> searchedItems;
+
+            if (NoteUtils.getQuickSearchMode().equals(NoteUtils.QS_TITLE)) {
+                searchedItems = db.getNoteModel().searchByTitle(strings[0]);
+            } else {
+                searchedItems = db.getNoteModel().searchByText(strings[0]);
+            }
+
+            return searchedItems;
         }
     }
 

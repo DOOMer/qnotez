@@ -32,4 +32,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--title for quick search settings dialog-->
+    <string name="settings_title_quick_search">Quick search by</string>
+    <string name="settings_summary_quick_search">
+        Quick search by note titles or note text.
+    </string>
+    <string name="settings_key_quick_search" translatable="false">
+        quicksearchBy
+    </string>
+    <string name="settings_qs_by_text" translatable="false">
+        qs_text
+    </string>
+    <string name="settings_qS_by_title" translatable="false">
+        qs_title
+    </string>
 </resources>

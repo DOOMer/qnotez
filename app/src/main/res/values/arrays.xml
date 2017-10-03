@@ -5,4 +5,15 @@
         <item>Share note</item>
         <item>Delete</item>
     </string-array>
+
+    <string-array name="settings_quick_search_titles">
+        <item>Titles</item>
+        <item>Text</item>
+    </string-array>
+
+    <string-array name="settings_quick_search_values">
+        <item>qs_title</item>
+        <item>qs_text</item>
+    </string-array>
+
 </resources>
