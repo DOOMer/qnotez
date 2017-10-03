@@ -1,12 +1,10 @@
 package org.doomer.qnotez;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -14,6 +12,8 @@ import org.doomer.qnotez.fragments.SettingsFragment;
 import org.doomer.qnotez.utils.ThemeChanger;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    public static boolean themeIsChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
-                return true;
+                if (!themeIsChanged) {
+                    finish();
+                    return true;
+                } else {
+                    themeIsChanged = false;
+                    return false;
+                }
         }
 
         return super.onOptionsItemSelected(item);

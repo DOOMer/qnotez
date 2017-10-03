@@ -7,11 +7,13 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v14.preference.PreferenceFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.doomer.qnotez.R;
+import org.doomer.qnotez.SettingsActivity;
 import org.doomer.qnotez.utils.ThemeChanger;
 
 /**Improvecode for adding fragments to main activity
@@ -43,7 +45,10 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(getString(R.string.settings_key_darkskin)) ) {
-            Activity parent = getActivity();
+            SettingsActivity parent = (SettingsActivity) getActivity();
+
+            parent.themeIsChanged = !parent.themeIsChanged;
+
             parent.finish();
 
             ThemeChanger.setFromSettings(parent);
