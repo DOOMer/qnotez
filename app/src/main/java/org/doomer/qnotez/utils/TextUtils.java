@@ -12,6 +12,10 @@ import org.doomer.qnotez.BuildConfig;
 
 public class TextUtils {
 
+    public static String prepareToLikeQuery(String text) {
+        return "%" + text + "%";
+    }
+
     public static String getVersionString() {
         String versionString;
 

@@ -119,4 +119,13 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
         di.putExtra(NoteDetailActivity.KEY_NOTE_ID, id);
         startActivity(di);
     }
+
+    public void quickSearch(String query) {
+        viewModel.quickSearch(query).observe((LifecycleOwner) getActivity(), new Observer<List<NoteModel>>() {
+            @Override
+            public void onChanged(@Nullable List<NoteModel> noteItems) {
+                recyclerViewAdapter.addItems(noteItems);
+            }
+        });
+    }
 }

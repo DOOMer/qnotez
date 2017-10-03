@@ -166,14 +166,17 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        Log.d("QQQQQQQ", "Query SUBMIT");
-//        viewModel.searchByText(query);
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        Log.d("QQQQQQ", "Query TEXT CHANGED");
+        MainFragment frg = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.FRAGMENT_TAG);
+
+        if (frg != null) {
+            frg.quickSearch(newText);
+        }
+
         return false;
     }
 }

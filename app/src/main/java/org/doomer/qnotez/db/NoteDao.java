@@ -20,6 +20,9 @@ public interface NoteDao {
     @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " ORDER BY updated DESC")
     LiveData<List<NoteModel>> getAllItems();
 
+    @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE title LIKE :text ORDER BY updated DESC")
+    LiveData<List<NoteModel>> searchByTitile(String text);
+
     @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE id = :id")
     NoteModel getItem(String id);
 
