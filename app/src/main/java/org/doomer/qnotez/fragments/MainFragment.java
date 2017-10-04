@@ -101,10 +101,23 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
                     break;
                 case NoteActions.ACTION_DELETE:
                     if (selectedItem != null) {
-                        viewModel.deleteItem(selectedItem);
+                        int strIdTitle = R.string.msg_warning;
+                        int strIdContent = R.string.msg_note_delete_text;
+
+                        MaterialDialog itemDelete = Dialogs.createConfirmDialog(MainFragment.this.getActivity(),
+                                strIdTitle, strIdContent,itemDeleteCallback);
+                        itemDelete.show();
                     }
                     break;
             }
+        }
+    };
+
+    private MaterialDialog.ButtonCallback itemDeleteCallback = new MaterialDialog.ButtonCallback() {
+        @Override
+        public void onPositive(MaterialDialog dialog) {
+            super.onPositive(dialog);
+            viewModel.deleteItem(selectedItem);
         }
     };
 

@@ -14,6 +14,10 @@
     <string name="warning_emty_text">Text can\'t be empty!</string>
     <string name="title_activity_note_detail">NoteDetailActivity</string>
     <string name="msg_note_saved">Saved...</string>
+    <string name="msg_warning">Warning</string>
+    <string name="msg_yes">Yes</string>
+    <string name="msg_no">No</string>
+    <string name="msg_note_delete_text">Do you want to delete this note?</string>
     <string name="txt_created">Created</string>
     <string name="txt_updated">Updated</string>
     <string name="title_activity_info">Info</string>
