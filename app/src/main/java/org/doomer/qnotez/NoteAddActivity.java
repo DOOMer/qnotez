@@ -1,6 +1,7 @@
 package org.doomer.qnotez;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -49,6 +50,16 @@ public class NoteAddActivity extends AppCompatActivity {
 
         txtUpdated.setText("");
 
+        Intent inSended = getIntent();
+        String actiion = inSended.getAction();
+        String type = inSended.getType();
+
+        if (Intent.ACTION_SEND.equals(actiion) && type != null) {
+            if (("text/plain".equals(type))) {
+                dataFromIntent(inSended);
+            }
+        }
+
         addViewModel = ViewModelProviders.of(this).get(NoteAddViewModel.class);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -67,6 +78,20 @@ public class NoteAddActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void dataFromIntent(Intent in) {
+        String sharedTitle = in.getStringExtra(Intent.EXTRA_SUBJECT);
+        String sharedText = in.getStringExtra(Intent.EXTRA_TEXT);
+
+        if (sharedTitle != null) {
+            editTitle.setText(sharedTitle);
+        }
+
+        if (sharedText != null) {
+            editText.setText(sharedText);
+        }
+
     }
 
     @Override
