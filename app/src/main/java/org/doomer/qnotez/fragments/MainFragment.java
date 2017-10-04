@@ -78,7 +78,7 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
     public boolean onLongClick(View view) {
         selectedItem = (NoteModel) view.getTag();
 
-        MaterialDialog itemMenu = Dialogs.createListDialog(getActivity(), R.id.item_title,
+        MaterialDialog itemMenu = Dialogs.createListDialog(getActivity(), R.string.title_item_actions,
                 R.array.item_action_names, itemSelectCallback);
         itemMenu.show();
         return true;
