@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.doomer.qnotez.db.NoteModel;
@@ -29,6 +30,9 @@ public class NoteAddActivity extends AppCompatActivity {
     @BindView(R.id.edit_text)
     protected EditText editText;
 
+    @BindView(R.id.txt_updated)
+    TextView txtUpdated;
+
     private NoteAddViewModel addViewModel;
 
     @Override
@@ -42,6 +46,8 @@ public class NoteAddActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        txtUpdated.setText("");
 
         addViewModel = ViewModelProviders.of(this).get(NoteAddViewModel.class);
 
