@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QNotez</string>
+    <string name="navigation_drawer_open">Открыть панель навигации</string>
+    <string name="navigation_drawer_close">Закрыть панель навигации</string>
+    <string name="action_search">Поиск</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_item_actions">Выберите действие</string>
+    <string name="action_item_share_chooser">Поделиться заметкой&#8230;</string>
+    <string name="action_item_delete">Удалить</string>
+    <string name="edit_note_title">Заголовок&#8230;</string>
+    <string name="edit_note_text">Текст&#8230;</string>
+    <string name="warning_emty_text">Поле ввода текста не может быть пустым!</string>
+    <string name="msg_note_saved">Поиск&#8230;</string>
+    <string name="msg_warning">Предупреждение</string>
+    <string name="msg_yes">Да</string>
+    <string name="msg_no">Нет</string>
+    <string name="msg_note_delete_text">Вы действительно хотите удалить эту заметку?</string>
+    <string name="txt_created">Создана</string>
+    <string name="txt_updated">Обновлена</string>
+    <string name="title_activity_info">Инфорация</string>
+    <string name="version">Версия</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="settings_title_display">Внешний вид</string>
+    <string name="settings_title_quick_search">Быстрый поиск по</string>
+    <string name="settings_titl_darkskin">Тёмное оформление</string>
+    <string name="settings_summary_quick_search">Быстрый поиск по заголовкам или тексту заметок</string>
+    <string name="settings_title_count_rows">Число строкпредпросмотра</string>
+    <string name="title_activity_note_add">Добавить запись</string>
+    <string name="title_activity_note_detail">Просмотр \\ bpvtytybt</string>
+    <string name="settings_summary_count_rows">Число отображаемых строк для записи в общем списке</string>
+    <string name="settings_key_count_rows" translatable="false">Число строк предпросмотра</string>
+</resources>

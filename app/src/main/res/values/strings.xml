@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QNotez</string>
+    <string name="app_name" translatable="false">QNotez</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,14 +7,14 @@
     <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
     <string name="title_item_actions">Select action</string>
-    <string name="action_item_share_chooser">Share your note...</string>
+    <string name="action_item_share_chooser">Share your note&#8230;</string>
     <string name="action_item_delete">Delete</string>
-    <string name="title_activity_note_add">NoteAddActivity</string>
+    <string name="title_activity_note_add">Add new note</string>
     <string name="edit_note_title">Title&#8230;</string>
     <string name="edit_note_text">Text&#8230;</string>
     <string name="warning_emty_text">Text can\'t be empty!</string>
-    <string name="title_activity_note_detail">NoteDetailActivity</string>
-    <string name="msg_note_saved">Saved...</string>
+    <string name="title_activity_note_detail">View or edit</string>
+    <string name="msg_note_saved">Saved&#8230;</string>
     <string name="msg_warning">Warning</string>
     <string name="msg_yes">Yes</string>
     <string name="msg_no">No</string>
@@ -35,30 +35,15 @@
         Use dark theme
     </string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!--title for quick search settings dialog-->
     <string name="settings_title_quick_search">Quick search by</string>
-    <string name="settings_summary_quick_search">
-        Quick search by note titles or note text.
-    </string>
-    <string name="settings_key_quick_search" translatable="false">
-        quicksearchBy
-    </string>
-    <string name="settings_qs_by_text" translatable="false">
-        qs_text
-    </string>
-    <string name="settings_qS_by_title" translatable="false">
-        qs_title
-    </string>
+    <string name="settings_summary_quick_search">Quick search by note titles or note text.</string>
+    <string name="settings_key_quick_search" translatable="false">quicksearchBy</string>
+    <string name="settings_qs_by_text" translatable="false">qs_text</string>
+    <string name="settings_qS_by_title" translatable="false">qs_title</string>
 
     <!-- strings for settings of the count displayed note's text lines -->
-    <string name="settings_key_count_rows" translatable="false">count_displayed_rows</string>
-    <string name="settings_title_count_rows">
-        Preview rows count
-    </string>
-    <string name="settings_summary_count_rows">
-        The number of rows in the preview
-    </string>
+    <string name="settings_key_count_rows">count_displayed_rows</string>
+    <string name="settings_title_count_rows">Preview rows count</string>
+    <string name="settings_summary_count_rows">The number of rows in the preview ine main list</string>
 </resources>
