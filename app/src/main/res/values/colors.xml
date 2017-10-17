@@ -10,6 +10,8 @@
     <color name="primaryTextColor">#e0f7fa</color>
     <color name="secondaryTextColor">#e0f2f1</color>
 
+    <!-- colors for customize searchview -->
+    <color name="search_background_light">#00766c</color>
 
     <!--colors for dark skin-->
     <color name="dark_primaryColor">#212121</color>
@@ -19,6 +21,11 @@
     <color name="dark_secondaryColor">#4db6ac</color>
     <color name="dark_secondaryLightColor">#82e9de</color>
     <color name="dark_secondaryDarkColor">#00867d</color>
+
+
+    <!-- colors for customize searchview -->
+    <color name="search_background_dark">#484848</color>
+
 </resources>
 
 <!--<resources>-->

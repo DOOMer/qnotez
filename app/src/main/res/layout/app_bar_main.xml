@@ -24,6 +24,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:visibility="invisible"
+                    android:layout_marginTop="@dimen/margin_vertical_quick_search"
+                    android:layout_marginBottom="@dimen/margin_vertical_quick_search"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:background="?attr/searchBackgroundColor"
                     android:layout_alignParentEnd="true" />
 
         </android.support.v7.widget.Toolbar>

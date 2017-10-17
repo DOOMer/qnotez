@@ -7,4 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="info_app_title">50sp</dimen>
+
+    <dimen name="margin_horizontal_quick_search">20dp</dimen>
+    <dimen name="margin_vertical_quick_search">10dp</dimen>
 </resources>
