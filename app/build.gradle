@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "org.doomer.qnotez"
         minSdkVersion 19
@@ -37,16 +37,19 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    implementation "android.arch.lifecycle:runtime:1.0.0"
-    implementation "android.arch.lifecycle:extensions:1.0.0-beta1"
-    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-beta1"
 
-//    testImplementation "android.arch.core.core-testing:1.0.0-beta1"
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    // alternatively, just ViewModel
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    // alternatively, just LiveData
+    implementation "android.arch.lifecycle:livedata:1.1.1"
 
-    implementation "android.arch.persistence.room:runtime:1.0.0-beta1"
-    annotationProcessor "android.arch.persistence.room:compiler:1.0.0-beta1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
 
-    testImplementation "android.arch.persistence.room:testing:1.0.0-beta1"
+    // Room (use 1.1.0-beta1 for latest beta)
+    implementation "android.arch.persistence.room:runtime:1.1.0-beta1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.0-beta1"
 
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
