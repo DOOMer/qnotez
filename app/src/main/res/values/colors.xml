@@ -3,7 +3,8 @@
 <resources>
     <color name="primaryColor">#26a69a</color>
     <color name="primaryLightColor">#64d8cb</color>
-    <color name="primaryDarkColor">#00766c</color>
+    <!--<color name="primaryDarkColor">#00766c</color>-->
+    <color name="primaryDarkColor">#212121</color>
     <color name="secondaryColor">#4db6ac</color>
     <color name="secondaryLightColor">#82e9de</color>
     <color name="secondaryDarkColor">#00867d</color>
