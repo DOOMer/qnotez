@@ -30,4 +30,6 @@
     <string name="title_activity_note_detail">Просмотр \\ изменение</string>
     <string name="settings_summary_count_rows">Число отображаемых строк для записи в общем списке</string>
     <string name="settings_key_count_rows" translatable="false">Число строк предпросмотра</string>
+
+    <string name="iten_no_title">Без заголовка</string>
 </resources>

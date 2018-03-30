@@ -46,4 +46,6 @@
     <string name="settings_key_count_rows">count_displayed_rows</string>
     <string name="settings_title_count_rows">Preview rows count</string>
     <string name="settings_summary_count_rows">The number of rows in the preview ine main list</string>
+
+    <string name="iten_no_title">No title</string>
 </resources>

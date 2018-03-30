@@ -77,7 +77,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             holder.txtText.setText(note.getText());
         }
 
-        holder.txtTitle.setText(note.getTitle());
+        String title = note.getTitle();
+
+        if (title.isEmpty()) {
+            title = holder.txtTitle.getContext().getString(R.string.iten_no_title);
+        }
+
+        holder.txtTitle.setText(title);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy k:mm");
         String createdString = sdf.format(note.getUpdated());
