@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="item_action_names">
+        <item>Просмотр и изменение</item>
+        <item>Поделиться...</item>
+        <item>Удалить</item>
+    </string-array>
+
+    <string-array name="settings_quick_search_titles">
+        <item>По заголовкам</item>
+        <item>По тексту</item>
+    </string-array>
+
+    <string-array name="settings_display_count_rows_titles">
+        <item>Весь текст</item>
+        <item>Только заголовки</item>
+    </string-array>
+
+</resources>
