@@ -21,7 +21,6 @@
         </activity>
         <activity
             android:name=".NoteAddActivity"
-            android:label="@string/title_activity_note_add"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

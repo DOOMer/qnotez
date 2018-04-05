@@ -45,6 +45,8 @@ public class NoteAddActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        setTitle(getString(R.string.title_activity_note_add));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
