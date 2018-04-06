@@ -26,14 +26,16 @@ public class Dialogs {
 
     public static MaterialDialog createConfirmDialog(final Context context,
                                                      int strIdTitle, int strIdContent,
-                                                     MaterialDialog.ButtonCallback callback) {
+                                                     MaterialDialog.SingleButtonCallback positive,
+                                                     MaterialDialog.SingleButtonCallback negative) {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
 
         builder.title(strIdTitle);
         builder.content(strIdContent);
         builder.positiveText(context.getString(R.string.msg_yes));
         builder.negativeText(context.getString(R.string.msg_no));
-        builder.callback(callback);
+        builder.onPositive(positive);
+        builder.onNegative(negative);
 
         MaterialDialog dialog = builder.build();
         return dialog;

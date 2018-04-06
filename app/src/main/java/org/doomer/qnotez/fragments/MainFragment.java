@@ -1,5 +1,6 @@
 package org.doomer.qnotez.fragments;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
@@ -16,6 +17,7 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.doomer.qnotez.MainActivity;
@@ -105,7 +107,7 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
                         int strIdContent = R.string.msg_note_delete_text;
 
                         MaterialDialog itemDelete = Dialogs.createConfirmDialog(MainFragment.this.getActivity(),
-                                strIdTitle, strIdContent,itemDeleteCallback);
+                                strIdTitle, strIdContent,itemDeleteCallback, null);
                         itemDelete.show();
                     }
                     break;
@@ -113,11 +115,19 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
         }
     };
 
-    private MaterialDialog.ButtonCallback itemDeleteCallback = new MaterialDialog.ButtonCallback() {
+//    private MaterialDialog.ButtonCallback itemDeleteCallback = new MaterialDialog.ButtonCallback() {
+//        @Override
+//        public void onPositive(MaterialDialog dialog) {
+//            super.onPositive(dialog);
+//            viewModel.deleteItem(selectedItem);
+//        }
+//    };
+
+    private MaterialDialog.SingleButtonCallback itemDeleteCallback = new MaterialDialog.SingleButtonCallback() {
         @Override
-        public void onPositive(MaterialDialog dialog) {
-            super.onPositive(dialog);
+        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
             viewModel.deleteItem(selectedItem);
+
         }
     };
 
