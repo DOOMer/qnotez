@@ -16,4 +16,11 @@
         <item>Только заголовки</item>
     </string-array>
 
+    <string-array name="settings_back_action_note_edit_titles">
+        <item>Не сохранять</item>
+        <item>Показать предупреждение</item>
+        <item>Сохранять автоматически</item>
+    </string-array>
+
+
 </resources>

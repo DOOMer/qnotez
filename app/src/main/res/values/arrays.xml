@@ -25,4 +25,17 @@
         <item>-1</item>
         <item>0</item>
     </string-array>
+
+    <string-array name="settings_back_action_note_edit_titles">
+        <item>No save</item>
+        <item>Display confirm</item>
+        <item>Save automatically</item>
+    </string-array>
+
+    <string-array name="settings_back_action_note_edit_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

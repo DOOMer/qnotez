@@ -31,5 +31,12 @@
     <string name="settings_summary_count_rows">Число отображаемых строк для записи в общем списке</string>
     <string name="settings_key_count_rows" translatable="false">Число строк предпросмотра</string>
 
+    <!-- string for behavior settings -->
+    <string name="settings_title_behavior">Поведение</string>
+    <string name="settings_title_back_action_note_edit">Действие кнопки \"Назад\"</string>
+    <string name="settings_summary_back_action_note_edit">
+        Выбор действия при нажатии кнопки "Назад" на экране создания или редактирования заметки
+    </string>
+
     <string name="iten_no_title">Без заголовка</string>
 </resources>

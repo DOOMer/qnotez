@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/settings_title_behavior">
+        <ListPreference android:key="@string/settings_key_back_action_note_edit"
+            android:title="@string/settings_title_back_action_note_edit"
+            android:summary="@string/settings_summary_back_action_note_edit"
+            android:entries="@array/settings_back_action_note_edit_titles"
+            android:entryValues="@array/settings_back_action_note_edit_values"
+            android:defaultValue="1" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/settings_title_display">
         <SwitchPreference android:key="@string/settings_key_darkskin"
             android:title="@string/settings_titl_darkskin"
