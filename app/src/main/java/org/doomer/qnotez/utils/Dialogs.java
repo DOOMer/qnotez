@@ -40,4 +40,15 @@ public class Dialogs {
         MaterialDialog dialog = builder.build();
         return dialog;
     }
+
+    public static MaterialDialog createCustomSingleDialog(final Context context, int strIdTitle,
+                                                          int custom_view) {
+
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context);
+        builder.title(strIdTitle);
+        builder.customView(custom_view, false);
+
+        MaterialDialog dialog = builder.build();
+        return dialog;
+    }
 }
