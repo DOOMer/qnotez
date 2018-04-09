@@ -19,10 +19,11 @@
     <string name="msg_yes">Yes</string>
     <string name="msg_no">No</string>
     <string name="msg_note_delete_text">Do you want to delete this note?</string>
+    <string name="msg_note_save_text">Do you want to save this note?</string>
     <string name="txt_created">Created</string>
     <string name="txt_updated">Updated</string>
     <string name="title_activity_info">Info</string>
-    <string name="txt_copyright" translatable="false">Copyright (c) 2017, Artem \"DOOMer\" Galichkin</string>
+    <string name="txt_copyright" translatable="false">Copyright (c) 2018, Artem \"DOOMer\" Galichkin</string>
     <string name="version">Version</string>
     <string name="title_activity_settings">Settings</string>
 

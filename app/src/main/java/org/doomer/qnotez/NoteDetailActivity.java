@@ -158,7 +158,7 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
                 break;
             case ActivityUtils.BACK_SAVE_CONFIRM:
                 int strIdTitle = R.string.msg_warning;
-                int strIdContent = R.string.msg_note_delete_text;
+                int strIdContent = R.string.msg_note_save_text;
 
                 MaterialDialog saveConfirm = Dialogs.createConfirmDialog(this,
                         strIdTitle, strIdContent, new MaterialDialog.SingleButtonCallback() {

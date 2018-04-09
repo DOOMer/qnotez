@@ -16,6 +16,7 @@
     <string name="msg_yes">Да</string>
     <string name="msg_no">Нет</string>
     <string name="msg_note_delete_text">Вы действительно хотите удалить эту заметку?</string>
+    <string name="msg_note_save_text">Сохранить эту заметку?</string>
     <string name="txt_created">Создана</string>
     <string name="txt_updated">Обновлена</string>
     <string name="title_activity_info">Информация</string>
