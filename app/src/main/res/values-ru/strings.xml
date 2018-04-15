@@ -40,4 +40,6 @@
     </string>
 
     <string name="iten_no_title">Без заголовка</string>
+
+    <string name="changelog_dialog_title">Изменения</string>
 </resources>

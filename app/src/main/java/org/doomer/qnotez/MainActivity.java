@@ -7,12 +7,9 @@ import android.content.Intent;
 import android.content.Context;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
@@ -23,8 +20,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import org.doomer.qnotez.adapters.RecyclerViewAdapter;
 import org.doomer.qnotez.db.AppDatabase;
@@ -36,6 +31,8 @@ import org.doomer.qnotez.utils.ThemeChanger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import org.doomer.qnotez.utils.ChangeLog;
 
 
 public class MainActivity extends AppCompatActivity
@@ -97,6 +94,8 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.main_content, mftg, MainFragment.FRAGMENT_TAG)
                     .commit();
         }
+
+        ChangeLog.showWhatsNew(this);
     }
 
     @Override

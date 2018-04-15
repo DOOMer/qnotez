@@ -1,0 +1,17 @@
+<changelog>
+
+    <release versionCode="1102" versionName="v1.1a" date="9 Apr 2018">
+        <bugfix>Small text string bugfix</bugfix>
+    </release>
+
+    <release versionCode="1100" versionName="v1.1" date="8 Apr 2018">
+        <new>Added the ability to save an editable note by pressing the back button.</new>
+    </release>
+
+    <!-- example with custom filter in release tag -->
+    <release versionCode="1" versionName="v1.0" date="3 Apr 2018">
+        <info>First public release</info>
+        <new>Ability for add, edit, delete and quick search functionality</new>
+    </release>
+
+</changelog>

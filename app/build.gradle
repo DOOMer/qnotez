@@ -7,7 +7,7 @@ android {
         applicationId "org.doomer.qnotez"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 1101
+        versionCode 1102
         versionName "1.1a"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
@@ -66,4 +66,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
+    compile 'com.github.MFlisar:changelog:1.0.1'
 }

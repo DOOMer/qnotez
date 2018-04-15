@@ -60,4 +60,6 @@
     <string name="info_open_source" translatable="false">
         QNotez is an open-source project available at\n https://github.com/DOOMer/qnotez
     </string>
+
+    <string name="changelog_dialog_title">What\'s new</string>
 </resources>
