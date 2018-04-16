@@ -115,14 +115,6 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
         }
     };
 
-//    private MaterialDialog.ButtonCallback itemDeleteCallback = new MaterialDialog.ButtonCallback() {
-//        @Override
-//        public void onPositive(MaterialDialog dialog) {
-//            super.onPositive(dialog);
-//            viewModel.deleteItem(selectedItem);
-//        }
-//    };
-
     private MaterialDialog.SingleButtonCallback itemDeleteCallback = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
