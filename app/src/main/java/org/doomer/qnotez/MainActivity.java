@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.search_view)
     SearchView searchView;
 
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeChanger.setFromSettings(this);
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,10 +151,12 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.nav_main:
                 ActivityUtils.changeFragment(this, R.id.main_content, MainFragment.FRAGMENT_TAG);
+                showFab(true);
                 break;
 
             case R.id.nav_trash:
                 ActivityUtils.changeFragment(this, R.id.main_content, TrashFragment.FRAGMENT_TAG);
+                showFab(false);
                 break;
 
             case R.id.nav_info:
@@ -204,5 +209,13 @@ public class MainActivity extends AppCompatActivity
             searchView.setVisibility(View.INVISIBLE);
         }
         return false;
+    }
+
+    public void showFab(boolean show) {
+        if (show) {
+            fab.setVisibility(View.VISIBLE);
+        } else {
+            fab.setVisibility(View.INVISIBLE);
+        }
     }
 }
