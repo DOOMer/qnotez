@@ -1,13 +1,13 @@
 package org.doomer.qnotez.fragments;
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,12 +15,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import org.doomer.qnotez.MainActivity;
 import org.doomer.qnotez.NoteDetailActivity;
 import org.doomer.qnotez.R;
 import org.doomer.qnotez.adapters.RecyclerViewAdapter;
@@ -36,9 +34,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainFragment extends Fragment implements OnClickListener, OnLongClickListener {
+public class TrashFragment extends Fragment implements OnClickListener, OnLongClickListener {
 
-    public static final String FRAGMENT_TAG = "MainFragment";
+    public static final String FRAGMENT_TAG = "TrashFragment";
 
     private NoteModel selectedItem;
     private NoteListViewModel viewModel;
@@ -64,7 +62,7 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
         recyclerView.setAdapter(recyclerViewAdapter);
 
         viewModel = ViewModelProviders.of(getActivity()).get(NoteListViewModel.class);
-        viewModel.setShowTrash(false);
+        viewModel.setShowTrash(true);
 
         // load items and make observer
         viewModel.getNoteItems().observe((LifecycleOwner) getActivity(), new Observer<List<NoteModel>>() {
@@ -74,7 +72,7 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
             }
         });
 
-        getActivity().setTitle(getString(R.string.app_name));
+        getActivity().setTitle(getString(R.string.nav_list_trash));
 
         return rootView;
     }
@@ -109,7 +107,7 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
                         int strIdTitle = R.string.msg_warning;
                         int strIdContent = R.string.msg_note_delete_text;
 
-                        MaterialDialog itemDelete = Dialogs.createConfirmDialog(MainFragment.this.getActivity(),
+                        MaterialDialog itemDelete = Dialogs.createConfirmDialog(TrashFragment.this.getActivity(),
                                 strIdTitle, strIdContent,itemDeleteCallback, null);
                         itemDelete.show();
                     }

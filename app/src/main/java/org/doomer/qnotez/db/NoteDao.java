@@ -17,8 +17,11 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 @TypeConverters(DateConverter.class)
 public interface NoteDao {
 
-    @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " ORDER BY updated DESC")
+    @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE " + NoteModel.COL_TRASH + "=0 ORDER BY updated DESC")
     LiveData<List<NoteModel>> getAllItems();
+
+    @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE " + NoteModel.COL_TRASH + "=1 ORDER BY updated DESC")
+    LiveData<List<NoteModel>> getAllItemsInTrahs();
 
     @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE title LIKE :text ORDER BY updated DESC")
     LiveData<List<NoteModel>> searchByTitle(String text);

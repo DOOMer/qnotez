@@ -21,6 +21,7 @@ public class NoteListViewModel extends AndroidViewModel {
     private  LiveData<List<NoteModel>> noteItems;
 //    private MutableLiveData<List<NoteModel>> noteItems = new MutableLiveData<>();
     protected AppDatabase database;
+    private boolean showInTrash = false;
 
     public NoteListViewModel(Application application) {
         super(application);
@@ -32,6 +33,13 @@ public class NoteListViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<NoteModel>> getNoteItems() {
+
+        if (!showInTrash) {
+            noteItems = database.getNoteModel().getAllItems();
+        } else {
+            noteItems = database.getNoteModel().getAllItemsInTrahs();
+        }
+
         return noteItems;
     }
 
@@ -89,5 +97,9 @@ public class NoteListViewModel extends AndroidViewModel {
             db.getNoteModel().deleteItem(noteModels[0]);
             return null;
         }
+    }
+
+    public void setShowTrash(boolean trashVisible) {
+        showInTrash = trashVisible;
     }
 }
