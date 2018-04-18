@@ -1,12 +1,17 @@
 package org.doomer.qnotez.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 
 import org.doomer.qnotez.R;
+import org.doomer.qnotez.fragments.MainFragment;
+import org.doomer.qnotez.fragments.TrashFragment;
+
 
 public class ActivityUtils {
     public static final int BACK_SAVE_NO = 0;
@@ -20,20 +25,21 @@ public class ActivityUtils {
         return Integer.parseInt(sp.getString(key, String.valueOf(BACK_SAVE_CONFIRM)));
     }
 
-    public static boolean fragmentInLayout(FragmentManager fm, String tag, Class className) {
-        boolean result = false;
+    public static void changeFragment(AppCompatActivity act, int layoutId, String tag) {
 
-        fm.executePendingTransactions();
+        Fragment frg = null;
 
-        Fragment f = fm.findFragmentByTag(tag);
-
-        if (f != null) {
-            if (f.getClass().getName().equals(className)) {
-                return true;
-            }
-
+        if (tag.equals(MainFragment.FRAGMENT_TAG)) {
+            frg = new MainFragment();
+        } else if (tag.equals(TrashFragment.FRAGMENT_TAG)) {
+            frg = new TrashFragment();
         }
 
-        return result;
+        if (frg != null) {
+            act.getSupportFragmentManager().beginTransaction()
+                    .replace(layoutId, frg, tag)
+                    .commit();
+        }
     }
+
 }

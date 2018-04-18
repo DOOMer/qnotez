@@ -25,6 +25,7 @@ import org.doomer.qnotez.adapters.RecyclerViewAdapter;
 import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.fragments.MainFragment;
+import org.doomer.qnotez.fragments.TrashFragment;
 import org.doomer.qnotez.viewmodel.NoteListViewModel;
 import org.doomer.qnotez.utils.ActivityUtils;
 import org.doomer.qnotez.utils.ThemeChanger;
@@ -85,15 +86,7 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(this);
         searchView.setOnCloseListener(this);
 
-        boolean ok = ActivityUtils.fragmentInLayout(getSupportFragmentManager(), MainFragment.FRAGMENT_TAG,
-                MainFragment.class);
-
-        if (!ok) {
-            MainFragment mftg = new MainFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_content, mftg, MainFragment.FRAGMENT_TAG)
-                    .commit();
-        }
+        ActivityUtils.changeFragment(this, R.id.main_content, MainFragment.FRAGMENT_TAG);
 
         ChangeLog.showWhatsNew(this);
     }
@@ -153,19 +146,30 @@ public class MainActivity extends AppCompatActivity
         Intent navIntent = null;
 
         switch (item.getItemId()) {
+            case R.id.nav_main:
+                ActivityUtils.changeFragment(this, R.id.main_content, MainFragment.FRAGMENT_TAG);
+                break;
+
+            case R.id.nav_trash:
+                ActivityUtils.changeFragment(this, R.id.main_content, TrashFragment.FRAGMENT_TAG);
+                break;
+
             case R.id.nav_info:
                 navIntent = new Intent(MainActivity.this, InfoActivity.class);
+                startActivity(navIntent);
                 break;
 
             case R.id.nav_settings:
                 navIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(navIntent);
                 break;
 
             default:
                 navIntent = new Intent(MainActivity.this, InfoActivity.class);
+                startActivity(navIntent);
         }
 
-        startActivity(navIntent);
+//        startActivity(navIntent);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

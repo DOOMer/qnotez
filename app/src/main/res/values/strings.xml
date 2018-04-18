@@ -62,4 +62,8 @@
     </string>
 
     <string name="changelog_dialog_title">What\'s new</string>
+
+    <string name="nav_list_main">Notes</string>
+    <string name="nav_list_trash">Trash</string>
+
 </resources>
