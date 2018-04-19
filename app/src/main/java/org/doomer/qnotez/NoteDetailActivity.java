@@ -12,6 +12,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,6 +58,7 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
     private NoteDetailViewModel viewModel;
     private int backAction = -1;
     private boolean readOnlyNote = false;
+    private boolean isSaved = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +82,6 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
                             .show();
                 } else {
                     saveNote();
-//                    NoteModel editNote = viewModel.getNoteItem().getValue();
-//                    editNote.setTitle(editTitle.getText().toString());
-//                    editNote.setText(editText.getText().toString()    );
-//
-//                    viewModel.updateItem(editNote);
                     Toast.makeText(NoteDetailActivity.this, "Saved", Toast.LENGTH_LONG).show();
                 }
             }
@@ -108,7 +106,8 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
 
         viewModel.getData(noteId);
 
-
+        editTitle.addTextChangedListener(editWatcher);
+        editText.addTextChangedListener(editWatcher);
     }
 
     @Override
@@ -177,32 +176,39 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
                     if (editText.getText().toString().isEmpty()) {
                         emptyTextWarning();
                     } else {
-                        saveNote();
+                        if (!isSaved) {
+                            saveNote();
+                        }
                         finish();
                     }
                     break;
                 case ActivityUtils.BACK_SAVE_CONFIRM:
-                    int strIdTitle = R.string.msg_warning;
-                    int strIdContent = R.string.msg_note_save_text;
+                    if (!isSaved) {
+                        int strIdTitle = R.string.msg_warning;
+                        int strIdContent = R.string.msg_note_save_text;
 
-                    MaterialDialog saveConfirm = Dialogs.createConfirmDialog(this,
-                            strIdTitle, strIdContent, new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    if (editText.getText().toString().isEmpty()) {
-                                        emptyTextWarning();
-                                    } else {
-                                        saveNote();
+                        MaterialDialog saveConfirm = Dialogs.createConfirmDialog(this,
+                                strIdTitle, strIdContent, new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        if (editText.getText().toString().isEmpty()) {
+                                            emptyTextWarning();
+                                        } else {
+                                            saveNote();
+                                            finish();
+                                        }
+                                    }
+                                }, new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                         finish();
                                     }
-                                }
-                            }, new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    finish();
-                                }
-                            });
-                    saveConfirm.show();
+                                });
+                        saveConfirm.show();
+                    } else {
+                        finish();
+                    }
+
                     break;
                 case ActivityUtils.BACK_SAVE_NO:
                     finish();
@@ -219,10 +225,42 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
         editNote.setText(editText.getText().toString()    );
 
         viewModel.updateItem(editNote);
+        isSaved = true;
+    }
+
+    public void checkCHanged() {
+        String newTitile = editTitle.getText().toString();
+        String newText = editText.getText().toString();
+
+        NoteModel checkNote = viewModel.getNoteItem().getValue();
+        if (checkNote.getTitle().equals(newTitile) && checkNote.getText().equals(newText)) {
+            // no changes
+            isSaved = true;
+        } else {
+            isSaved = false;
+        }
+
     }
 
     private void emptyTextWarning() {
         Snackbar.make(editText, getString(R.string.warning_emty_text), Snackbar.LENGTH_LONG)
                 .show();
     }
+
+    private TextWatcher editWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            checkCHanged();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 }
