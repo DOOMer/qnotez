@@ -9,6 +9,7 @@ import android.util.Log;
 
 import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;
+import org.doomer.qnotez.utils.NoteUtils;
 
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -38,7 +39,7 @@ public class NoteDetailViewModel extends AndroidViewModel {
 
     public void updateItem(NoteModel note) {
         note.setUpdated(new Date());
-        new UpdateItemAsyncTask(database).execute(note);
+        new NoteUtils.NoteUpdateAsyncTask(database).execute(note);
         noteItem.setValue(note);
     }
 
@@ -59,18 +60,4 @@ public class NoteDetailViewModel extends AndroidViewModel {
             return db.getNoteModel().getItem(strings[0]);
         }
     };
-
-    private static class UpdateItemAsyncTask extends AsyncTask<NoteModel, Void, Void> {
-        private AppDatabase db;
-
-        public UpdateItemAsyncTask(AppDatabase database) {
-            db = database;
-        }
-
-        @Override
-        protected Void doInBackground(NoteModel... noteModels) {
-            db.getNoteModel().updateItem(noteModels[0]);
-            return null;
-        }
-    }
 }

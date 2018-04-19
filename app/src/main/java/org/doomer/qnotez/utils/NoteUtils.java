@@ -3,10 +3,12 @@ package org.doomer.qnotez.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
 import org.doomer.qnotez.App;
 import org.doomer.qnotez.R;
+import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;
 
 public class NoteUtils {
@@ -39,5 +41,49 @@ public class NoteUtils {
         String key = ctx.getString(R.string.settings_key_quick_search);
 
         return sp.getString(key, ctx.getString(R.string.settings_qs_by_text));
+    }
+
+    public static class NoteAddAsyncTask extends AsyncTask<NoteModel, Void, Void> {
+
+        private AppDatabase db;
+
+        public NoteAddAsyncTask(AppDatabase database) {
+            db = database;
+        }
+
+        @Override
+        protected Void doInBackground(NoteModel... noteModels) {
+            db.getNoteModel().addItem(noteModels[0]);
+            return null;
+        }
+    }
+
+    public static class NoteUpdateAsyncTask extends AsyncTask<NoteModel, Void, Void> {
+        private AppDatabase db;
+
+        public NoteUpdateAsyncTask(AppDatabase database) {
+            db = database;
+        }
+
+        @Override
+        protected Void doInBackground(NoteModel... noteModels) {
+            db.getNoteModel().updateItem(noteModels[0]);
+            return null;
+        }
+    }
+
+    public static class NoteDeleteAsyncTask extends AsyncTask<NoteModel, Void, Void> {
+
+        private AppDatabase db;
+
+        public NoteDeleteAsyncTask(AppDatabase database) {
+            db = database;
+        }
+
+        @Override
+        protected Void doInBackground(NoteModel... noteModels) {
+            db.getNoteModel().deleteItem(noteModels[0]);
+            return null;
+        }
     }
 }

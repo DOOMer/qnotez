@@ -60,7 +60,7 @@ public class NoteListViewModel extends AndroidViewModel {
     }
 
     public void deleteItem(NoteModel item) {
-        new deleteAsyncTast(database).execute(item);
+        new NoteUtils.NoteDeleteAsyncTask(database).execute(item);
     }
 
     private static class searchAstncTask extends AsyncTask<String, Void, LiveData<List<NoteModel>>> {
@@ -81,21 +81,6 @@ public class NoteListViewModel extends AndroidViewModel {
             }
 
             return searchedItems;
-        }
-    }
-
-    private static class deleteAsyncTast extends AsyncTask<NoteModel, Void, Void> {
-
-        private AppDatabase db;
-
-        deleteAsyncTast(AppDatabase database) {
-            db = database;
-        }
-
-        @Override
-        protected Void doInBackground(NoteModel... noteModels) {
-            db.getNoteModel().deleteItem(noteModels[0]);
-            return null;
         }
     }
 
