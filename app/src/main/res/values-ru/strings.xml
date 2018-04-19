@@ -29,6 +29,7 @@
     <string name="settings_title_count_rows">Число строк предпросмотра</string>
     <string name="title_activity_note_add">Добавить запись</string>
     <string name="title_activity_note_detail">Просмотр \\ изменение</string>
+    <string name="title_activity_note_detail_ro">Просмотр</string>
     <string name="settings_summary_count_rows">Число отображаемых строк для записи в общем списке</string>
     <string name="settings_key_count_rows" translatable="false">Число строк предпросмотра</string>
 

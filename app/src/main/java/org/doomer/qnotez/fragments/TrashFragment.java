@@ -25,7 +25,6 @@ import org.doomer.qnotez.adapters.RecyclerViewAdapter;
 import org.doomer.qnotez.consts.NoteActions;
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.utils.Dialogs;
-import org.doomer.qnotez.utils.NoteUtils;
 import org.doomer.qnotez.viewmodel.NoteListViewModel;
 
 import java.util.ArrayList;
@@ -128,6 +127,7 @@ public class TrashFragment extends Fragment implements OnClickListener, OnLongCl
     private void editItem(int id) {
         Intent di = new Intent(getActivity(), NoteDetailActivity.class);
         di.putExtra(NoteDetailActivity.KEY_NOTE_ID, id);
+        di.putExtra(NoteActions.NOTE_READ_ONLY, true);
         startActivity(di);
     }
 

@@ -9,4 +9,6 @@ public class NoteActions {
     public static final int IN_TRASH_RESTORE = 0;
     public static final int IN_TRASH_KILL = 1;
 
+    public static final String NOTE_READ_ONLY = "noteIsReadOnly";
+
 }

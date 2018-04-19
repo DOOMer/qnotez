@@ -25,6 +25,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import org.doomer.qnotez.consts.NoteActions;
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.utils.ActivityUtils;
 import org.doomer.qnotez.utils.Dialogs;
@@ -49,8 +50,12 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
     @BindView(R.id.txt_updated)
     protected TextView txtUpdated;
 
+    @BindView(R.id.fab)
+    protected FloatingActionButton fab;
+
     private NoteDetailViewModel viewModel;
     private int backAction = -1;
+    private boolean readOnlyNote = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +70,7 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +95,17 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
         int noteId = in.getIntExtra(KEY_NOTE_ID, 0);
         viewModel = ViewModelProviders.of(this).get(NoteDetailViewModel.class);
 
+        readOnlyNote = in.getBooleanExtra(NoteActions.NOTE_READ_ONLY, false);
+
+        if (readOnlyNote) {
+            fab.setVisibility(View.INVISIBLE);
+            editTitle.setFocusable(false);
+            editText.setFocusable(false);
+            setTitle(getString(R.string.title_activity_note_detail_ro));
+        }
+
         subscribe();
+
         viewModel.getData(noteId);
 
 
@@ -107,7 +122,16 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
             public void onChanged(@Nullable NoteModel noteModel) {
 
                 if (noteModel != null) {
-                    editTitle.setText(noteModel.getTitle());
+
+                    String title = noteModel.getTitle();
+
+                    if (readOnlyNote) {
+                        if (title.isEmpty()) {
+                            title = getString(R.string.iten_no_title);
+                        }
+                    }
+
+                    editTitle.setText(title);
                     editText.setText(noteModel.getText());
 
                     SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy k:mm");
@@ -147,41 +171,45 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
     }
 
     private void checkForSave() {
-        switch (backAction) {
-            case ActivityUtils.BACK_SAVE_AUTO:
-                if (editText.getText().toString().isEmpty()) {
-                    emptyTextWarning();
-                } else {
-                    saveNote();
-                    finish();
-                }
-                break;
-            case ActivityUtils.BACK_SAVE_CONFIRM:
-                int strIdTitle = R.string.msg_warning;
-                int strIdContent = R.string.msg_note_save_text;
+        if (!readOnlyNote) {
+            switch (backAction) {
+                case ActivityUtils.BACK_SAVE_AUTO:
+                    if (editText.getText().toString().isEmpty()) {
+                        emptyTextWarning();
+                    } else {
+                        saveNote();
+                        finish();
+                    }
+                    break;
+                case ActivityUtils.BACK_SAVE_CONFIRM:
+                    int strIdTitle = R.string.msg_warning;
+                    int strIdContent = R.string.msg_note_save_text;
 
-                MaterialDialog saveConfirm = Dialogs.createConfirmDialog(this,
-                        strIdTitle, strIdContent, new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                if (editText.getText().toString().isEmpty()) {
-                                    emptyTextWarning();
-                                } else {
-                                    saveNote();
+                    MaterialDialog saveConfirm = Dialogs.createConfirmDialog(this,
+                            strIdTitle, strIdContent, new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    if (editText.getText().toString().isEmpty()) {
+                                        emptyTextWarning();
+                                    } else {
+                                        saveNote();
+                                        finish();
+                                    }
+                                }
+                            }, new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                     finish();
                                 }
-                            }
-                        }, new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                finish();
-                            }
-                        });
-                saveConfirm.show();
-                break;
-            case ActivityUtils.BACK_SAVE_NO:
-                finish();
-                break;
+                            });
+                    saveConfirm.show();
+                    break;
+                case ActivityUtils.BACK_SAVE_NO:
+                    finish();
+                    break;
+            }
+        } else {
+            finish();
         }
     }
 

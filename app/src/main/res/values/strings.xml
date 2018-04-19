@@ -14,6 +14,7 @@
     <string name="edit_note_text">Text&#8230;</string>
     <string name="warning_emty_text">Text can\'t be empty!</string>
     <string name="title_activity_note_detail">View or edit</string>
+    <string name="title_activity_note_detail_ro">View</string>
     <string name="msg_note_saved">Saved&#8230;</string>
     <string name="msg_warning">Warning</string>
     <string name="msg_yes">Yes</string>
