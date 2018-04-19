@@ -6,6 +6,11 @@
         <item>Удалить</item>
     </string-array>
 
+    <string-array name="item_action_in_trash_names">
+        <item>Восстановить</item>
+        <item>Удалить</item>
+    </string-array>
+
     <string-array name="settings_quick_search_titles">
         <item>По заголовкам</item>
         <item>По тексту</item>

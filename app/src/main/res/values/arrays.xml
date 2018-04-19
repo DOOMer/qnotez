@@ -6,6 +6,11 @@
         <item>Delete</item>
     </string-array>
 
+    <string-array name="item_action_in_trash_names">
+        <item>Restore note</item>
+        <item>Delete</item>
+    </string-array>
+
     <string-array name="settings_quick_search_titles">
         <item>Titles</item>
         <item>Text</item>

@@ -82,7 +82,7 @@ public class TrashFragment extends Fragment implements OnClickListener, OnLongCl
         selectedItem = (NoteModel) view.getTag();
 
         MaterialDialog itemMenu = Dialogs.createListDialog(getActivity(), R.string.title_item_actions,
-                R.array.item_action_names, itemSelectCallback);
+                R.array.item_action_in_trash_names, itemSelectCallback);
         itemMenu.show();
         return true;
     }
@@ -92,17 +92,12 @@ public class TrashFragment extends Fragment implements OnClickListener, OnLongCl
         public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
 
             switch (position) {
-                case NoteActions.ACTION_VIEW:
+                case NoteActions.IN_TRASH_RESTORE:
                     if (selectedItem != null) {
-                        editItem(selectedItem.id);
+                        viewModel.moveFromTrash(selectedItem);
                     }
                     break;
-                case NoteActions.ACTION_SHARE:
-                    if (selectedItem != null) {
-                        NoteUtils.shareNote(selectedItem, getActivity());
-                    }
-                    break;
-                case NoteActions.ACTION_DELETE:
+                case NoteActions.IN_TRASH_KILL:
                     if (selectedItem != null) {
                         int strIdTitle = R.string.msg_warning;
                         int strIdContent = R.string.msg_note_delete_text;

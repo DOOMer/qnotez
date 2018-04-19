@@ -109,6 +109,7 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
                         int strIdTitle = R.string.msg_warning;
                         int strIdContent = R.string.msg_note_delete_text;
 
+                        // TODO add chek settings for move note to trashbox or direct delete
                         MaterialDialog itemDelete = Dialogs.createConfirmDialog(MainFragment.this.getActivity(),
                                 strIdTitle, strIdContent,itemDeleteCallback, null);
                         itemDelete.show();
@@ -121,7 +122,8 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
     private MaterialDialog.SingleButtonCallback itemDeleteCallback = new MaterialDialog.SingleButtonCallback() {
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            viewModel.deleteItem(selectedItem);
+            // TODO add chek settings for move note to trashbox or direct delete
+            viewModel.moveToTrash(selectedItem);
 
         }
     };

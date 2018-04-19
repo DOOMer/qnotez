@@ -87,4 +87,14 @@ public class NoteListViewModel extends AndroidViewModel {
     public void setShowTrash(boolean trashVisible) {
         showInTrash = trashVisible;
     }
+
+    public void moveToTrash(NoteModel item) {
+        item.setInTrash(true);
+        new NoteUtils.NoteUpdateAsyncTask(database).execute(item);
+    }
+
+    public void moveFromTrash(NoteModel item) {
+        item.setInTrash(false);
+        new NoteUtils.NoteUpdateAsyncTask(database).execute(item);
+    }
 }
