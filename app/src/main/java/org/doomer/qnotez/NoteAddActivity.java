@@ -127,26 +127,32 @@ public class NoteAddActivity extends AppCompatActivity {
                 }
                 break;
             case ActivityUtils.BACK_SAVE_CONFIRM:
-                int strIdTitle = R.string.msg_warning;
-                int strIdContent = R.string.msg_note_save_text;
+                if (editTitle.getText().toString().isEmpty() && editText.getText().toString().isEmpty()) {
+                    finish();
+                } else {
+                    int strIdTitle = R.string.msg_warning;
+                    int strIdContent = R.string.msg_note_save_text;
 
-                MaterialDialog saveConfirm = Dialogs.createConfirmDialog(this,
-                        strIdTitle, strIdContent, new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                if (editText.getText().toString().isEmpty()) {
-                                    emptyTextWarning();
-                                } else {
-                                    saveNote();
+                    MaterialDialog saveConfirm = Dialogs.createConfirmDialog(this,
+                            strIdTitle, strIdContent, new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    if (editText.getText().toString().isEmpty()) {
+                                        emptyTextWarning();
+                                    } else {
+                                        saveNote();
+                                    }
                                 }
-                            }
-                        }, new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                finish();
-                            }
-                        });
-                saveConfirm.show();
+                            }, new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    finish();
+                                }
+                            });
+                    saveConfirm.show();
+                }
+
+
                 break;
             case ActivityUtils.BACK_SAVE_NO:
                 finish();
