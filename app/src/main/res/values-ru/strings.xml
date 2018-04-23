@@ -48,4 +48,8 @@
     <string name="nav_list_main">Заметки</string>
     <string name="nav_list_trash">Корзина</string>
 
+    <string name="snack_msg_deleted">Заметка удалена</string>
+    <string name="snack_msg_move_to_trash">Перемещено в корзину</string>
+    <string name="snack_msg_move_from_trash">Восстановлено из корзины</string>
+
 </resources>

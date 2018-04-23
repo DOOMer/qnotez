@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -60,6 +62,8 @@ public class TrashFragment extends Fragment implements OnClickListener, OnLongCl
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(recyclerViewAdapter);
 
+        noteTouchHelper.attachToRecyclerView(recyclerView);
+
         viewModel = ViewModelProviders.of(getActivity()).get(NoteListViewModel.class);
         viewModel.setShowTrash(true);
 
@@ -98,12 +102,7 @@ public class TrashFragment extends Fragment implements OnClickListener, OnLongCl
                     break;
                 case NoteActions.IN_TRASH_KILL:
                     if (selectedItem != null) {
-                        int strIdTitle = R.string.msg_warning;
-                        int strIdContent = R.string.msg_note_delete_text;
-
-                        MaterialDialog itemDelete = Dialogs.createConfirmDialog(TrashFragment.this.getActivity(),
-                                strIdTitle, strIdContent,itemDeleteCallback, null);
-                        itemDelete.show();
+                        showDialogForDelete(null);
                     }
                     break;
             }
@@ -114,7 +113,17 @@ public class TrashFragment extends Fragment implements OnClickListener, OnLongCl
         @Override
         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
             viewModel.deleteItem(selectedItem);
+            recyclerViewAdapter.notifyDataSetChanged();
+            Snackbar.make(recyclerView, getString(R.string.snack_msg_deleted), Snackbar.LENGTH_LONG)
+                    .show();
 
+        }
+    };
+
+    private MaterialDialog.SingleButtonCallback itemDeleteCancelCallback = new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            recyclerViewAdapter.notifyDataSetChanged();
         }
     };
 
@@ -139,4 +148,41 @@ public class TrashFragment extends Fragment implements OnClickListener, OnLongCl
             }
         });
     }
+
+    private ItemTouchHelper.SimpleCallback noteTouchCallback = new ItemTouchHelper.SimpleCallback(
+            0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT
+    ) {
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            selectedItem = (NoteModel) viewHolder.itemView.getTag();
+
+            if (direction == ItemTouchHelper.LEFT) {
+                viewModel.moveFromTrash(selectedItem);
+                Snackbar.make(recyclerView, getString(R.string.snack_msg_move_from_trash), Snackbar.LENGTH_LONG)
+                        .show();
+            } else {
+                showDialogForDelete(itemDeleteCancelCallback);
+            }
+
+
+        }
+    };
+
+    private ItemTouchHelper noteTouchHelper = new ItemTouchHelper(noteTouchCallback);
+
+    private void showDialogForDelete(MaterialDialog.SingleButtonCallback cancelCallback) {
+        int strIdTitle = R.string.msg_warning;
+        int strIdContent = R.string.msg_note_delete_text;
+
+        MaterialDialog itemDelete = Dialogs.createConfirmDialog(TrashFragment.this.getActivity(),
+                strIdTitle, strIdContent,itemDeleteCallback, cancelCallback);
+        itemDelete.show();
+    }
+
 }

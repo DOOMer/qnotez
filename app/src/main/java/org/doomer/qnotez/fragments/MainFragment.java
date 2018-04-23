@@ -1,6 +1,7 @@
 package org.doomer.qnotez.fragments;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,6 +64,8 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(recyclerViewAdapter);
+
+        noteTouchHelper.attachToRecyclerView(recyclerView);
 
         viewModel = ViewModelProviders.of(getActivity()).get(NoteListViewModel.class);
         viewModel.setShowTrash(false);
@@ -148,4 +152,26 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
             }
         });
     }
+
+    private ItemTouchHelper.SimpleCallback noteTouchCallback = new ItemTouchHelper.SimpleCallback(
+            0, ItemTouchHelper.RIGHT
+    ) {
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            NoteModel item = (NoteModel) viewHolder.itemView.getTag();
+            viewModel.moveToTrash(item);
+            recyclerViewAdapter.notifyDataSetChanged();
+            Snackbar.make(recyclerView, getString(R.string.snack_msg_move_to_trash), Snackbar.LENGTH_LONG)
+                    .show();
+        }
+    };
+
+    private ItemTouchHelper noteTouchHelper = new ItemTouchHelper(noteTouchCallback);
+
 }

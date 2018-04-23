@@ -67,4 +67,7 @@
     <string name="nav_list_main">Notes</string>
     <string name="nav_list_trash">Trash</string>
 
+    <string name="snack_msg_deleted">Note is deleted</string>
+    <string name="snack_msg_move_to_trash">Moved to trash</string>
+    <string name="snack_msg_move_from_trash">Restored from trash</string>
 </resources>
