@@ -3,6 +3,7 @@ package org.doomer.qnotez;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import org.doomer.qnotez.fragments.SettingsFragment;
@@ -46,5 +47,11 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        MenuItem home = (MenuItem) findViewById(android.R.id.home);
+        onOptionsItemSelected(home);
     }
 }
