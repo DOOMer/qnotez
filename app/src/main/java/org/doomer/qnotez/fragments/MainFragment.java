@@ -12,12 +12,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -31,6 +33,7 @@ import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.utils.Dialogs;
 import org.doomer.qnotez.utils.NoteUtils;
 import org.doomer.qnotez.viewmodel.NoteListViewModel;
+import org.doomer.qnotez.views.RecyclerViewEx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +50,10 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
     private RecyclerViewAdapter recyclerViewAdapter;
 
     @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
+    RecyclerViewEx recyclerView;
+
+    @BindView(R.id.empty_text_view)
+    TextView textEmptyView;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -60,10 +66,14 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
 
+        textEmptyView.setText(getString(R.string.txt_empty_notes_list));
+        textEmptyView.setTextSize(TypedValue.COMPLEX_UNIT_SP, getResources().getDimension(R.dimen.text_size_for_empty_list));
+
         recyclerViewAdapter = new RecyclerViewAdapter(new ArrayList<NoteModel>(), this, this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setEmptyTextView(textEmptyView);
 
         noteTouchHelper.attachToRecyclerView(recyclerView);
 

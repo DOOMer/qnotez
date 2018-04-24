@@ -11,4 +11,6 @@
 
     <dimen name="margin_horizontal_quick_search">20dp</dimen>
     <dimen name="margin_vertical_quick_search">10dp</dimen>
+
+    <dimen name="text_size_for_empty_list">10sp</dimen>
 </resources>
