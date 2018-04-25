@@ -23,11 +23,13 @@ public interface NoteDao {
     @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE " + NoteModel.COL_TRASH + "=1 ORDER BY updated DESC")
     LiveData<List<NoteModel>> getAllItemsInTrahs();
 
-    @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE title LIKE :text ORDER BY updated DESC")
-    LiveData<List<NoteModel>> searchByTitle(String text);
+    @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE " + NoteModel.COL_TRASH +
+            "=:inTrash AND title LIKE :text ORDER BY updated DESC")
+    LiveData<List<NoteModel>> searchByTitle(String text, String inTrash);
 
-    @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE text LIKE :text ORDER BY updated DESC")
-    LiveData<List<NoteModel>> searchByText(String text);
+    @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE " + NoteModel.COL_TRASH +
+            "=:inTrash AND text LIKE :text ORDER BY updated DESC")
+    LiveData<List<NoteModel>> searchByText(String text, String inTrash);
 
     @Query("SELECT * FROM " + NoteModel.TABLE_NAME + " WHERE id = :id")
     NoteModel getItem(String id);

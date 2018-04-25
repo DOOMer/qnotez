@@ -1,5 +1,6 @@
 package org.doomer.qnotez.utils;
 
+import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,8 @@ import org.doomer.qnotez.App;
 import org.doomer.qnotez.R;
 import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;
+
+import java.util.List;
 
 public class NoteUtils {
 
@@ -84,6 +87,26 @@ public class NoteUtils {
         protected Void doInBackground(NoteModel... noteModels) {
             db.getNoteModel().deleteItem(noteModels[0]);
             return null;
+        }
+    }
+
+    public static class SearchAsyncTask extends AsyncTask<String, Void, LiveData<List<NoteModel>>> {
+        private AppDatabase db;
+
+        public SearchAsyncTask(AppDatabase database) {
+            db = database;
+        }
+
+        @Override
+        protected LiveData<List<NoteModel>> doInBackground(String... strings) {
+            LiveData<List<NoteModel>> searchedItems;
+            if (NoteUtils.getQuickSearchMode().equals(NoteUtils.QS_TITLE)) {
+                searchedItems = db.getNoteModel().searchByTitle(strings[0], strings[1]);
+            } else {
+                searchedItems = db.getNoteModel().searchByText(strings[0], strings[1]);
+            }
+
+            return searchedItems;
         }
     }
 }

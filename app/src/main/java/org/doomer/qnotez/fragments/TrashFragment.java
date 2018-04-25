@@ -153,7 +153,7 @@ public class TrashFragment extends Fragment implements OnClickListener, OnLongCl
     }
 
     public void quickSearch(String query) {
-        viewModel.quickSearch(query).observe((LifecycleOwner) getActivity(), new Observer<List<NoteModel>>() {
+        viewModel.quickSearch(query, true).observe((LifecycleOwner) getActivity(), new Observer<List<NoteModel>>() {
             @Override
             public void onChanged(@Nullable List<NoteModel> noteItems) {
                 recyclerViewAdapter.addItems(noteItems);

@@ -12,13 +12,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -155,7 +155,7 @@ public class MainFragment extends Fragment implements OnClickListener, OnLongCli
     }
 
     public void quickSearch(String query) {
-        viewModel.quickSearch(query).observe((LifecycleOwner) getActivity(), new Observer<List<NoteModel>>() {
+        viewModel.quickSearch(query, false).observe((LifecycleOwner) getActivity(), new Observer<List<NoteModel>>() {
             @Override
             public void onChanged(@Nullable List<NoteModel> noteItems) {
                 recyclerViewAdapter.addItems(noteItems);

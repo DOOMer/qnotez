@@ -3,11 +3,8 @@ package org.doomer.qnotez.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.os.AsyncTask;
 import android.util.Log;
 
-import org.doomer.qnotez.App;
-import org.doomer.qnotez.R;
 import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.utils.NoteUtils;
@@ -43,13 +40,14 @@ public class NoteListViewModel extends AndroidViewModel {
         return noteItems;
     }
 
-    public LiveData<List<NoteModel>> quickSearch(String text) {
+    public LiveData<List<NoteModel>> quickSearch(String text, boolean inTrash) {
         text = TextUtils.prepareToLikeQuery(text);
 
-        searchAstncTask searchTask = new searchAstncTask(database);
+        String inTrashStr = inTrash ? "1" : "0";
+        NoteUtils.SearchAsyncTask searchTask = new NoteUtils.SearchAsyncTask(database);
 
         try {
-            noteItems = searchTask.execute(text).get();
+            noteItems = searchTask.execute(text, inTrashStr).get();
         } catch (InterruptedException e){
             Log.d("SSSSS", "INTERRUPT EXCEPTION");
         } catch (ExecutionException e) {
@@ -63,26 +61,6 @@ public class NoteListViewModel extends AndroidViewModel {
         new NoteUtils.NoteDeleteAsyncTask(database).execute(item);
     }
 
-    private static class searchAstncTask extends AsyncTask<String, Void, LiveData<List<NoteModel>>> {
-        private AppDatabase db;
-
-        public searchAstncTask(AppDatabase database) {
-            db = database;
-        }
-
-        @Override
-        protected LiveData<List<NoteModel>> doInBackground(String... strings) {
-            LiveData<List<NoteModel>> searchedItems;
-
-            if (NoteUtils.getQuickSearchMode().equals(NoteUtils.QS_TITLE)) {
-                searchedItems = db.getNoteModel().searchByTitle(strings[0]);
-            } else {
-                searchedItems = db.getNoteModel().searchByText(strings[0]);
-            }
-
-            return searchedItems;
-        }
-    }
 
     public void setShowTrash(boolean trashVisible) {
         showInTrash = trashVisible;

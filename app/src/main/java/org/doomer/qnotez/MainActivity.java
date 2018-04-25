@@ -205,12 +205,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        MainFragment frg = (MainFragment) getSupportFragmentManager().findFragmentByTag(MainFragment.FRAGMENT_TAG);
-
-        if (frg != null) {
+        // TODO - create common base fragment class and inherit from it other fragments (main, trash, etc)
+        if (curFragmentTag.equals(TrashFragment.FRAGMENT_TAG)) {
+            TrashFragment frg = (TrashFragment) getSupportFragmentManager().findFragmentByTag(curFragmentTag);
+            frg.quickSearch(newText);
+        } else {
+            MainFragment frg = (MainFragment) getSupportFragmentManager().findFragmentByTag(curFragmentTag);
             frg.quickSearch(newText);
         }
-
         return false;
     }
 
