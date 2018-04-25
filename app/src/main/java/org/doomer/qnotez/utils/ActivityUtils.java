@@ -29,10 +29,10 @@ public class ActivityUtils {
 
         Fragment frg = null;
 
-        if (tag.equals(MainFragment.FRAGMENT_TAG)) {
-            frg = new MainFragment();
-        } else if (tag.equals(TrashFragment.FRAGMENT_TAG)) {
+        if (tag.equals(TrashFragment.FRAGMENT_TAG)) {
             frg = new TrashFragment();
+        } else {
+            frg = new MainFragment();
         }
 
         if (frg != null) {

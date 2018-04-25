@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
+    private final String KEY_CURRENT_FRG = "saved_current_fragment";
+    private String curFragmentTag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeChanger.setFromSettings(this);
@@ -89,9 +92,21 @@ public class MainActivity extends AppCompatActivity
         searchView.setOnQueryTextListener(this);
         searchView.setOnCloseListener(this);
 
-        ActivityUtils.changeFragment(this, R.id.main_content, MainFragment.FRAGMENT_TAG);
+        if (savedInstanceState != null) {
+            curFragmentTag = savedInstanceState.getString(KEY_CURRENT_FRG);
+        } else {
+            curFragmentTag = MainFragment.FRAGMENT_TAG;
+        }
+        ActivityUtils.changeFragment(this, R.id.main_content, curFragmentTag);
 
         ChangeLog.showWhatsNew(this);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(KEY_CURRENT_FRG, curFragmentTag);
+
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -150,11 +165,13 @@ public class MainActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.nav_main:
+                curFragmentTag = MainFragment.FRAGMENT_TAG;
                 ActivityUtils.changeFragment(this, R.id.main_content, MainFragment.FRAGMENT_TAG);
                 showFab(true);
                 break;
 
             case R.id.nav_trash:
+                curFragmentTag = TrashFragment.FRAGMENT_TAG;
                 ActivityUtils.changeFragment(this, R.id.main_content, TrashFragment.FRAGMENT_TAG);
                 showFab(false);
                 break;
