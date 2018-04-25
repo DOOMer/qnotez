@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="org.doomer.qnotez.NoteAddActivity"
+    tools:context="org.doomer.qnotez.ui.NoteAddActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp"
     tools:showIn="@layout/activity_note_add">

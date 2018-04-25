@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="org.doomer.qnotez.InfoActivity"
+    tools:context="org.doomer.qnotez.ui.InfoActivity"
     tools:layout_editor_absoluteY="81dp"
     tools:showIn="@layout/activity_info">
 

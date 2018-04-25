@@ -1,4 +1,4 @@
-package org.doomer.qnotez;
+package org.doomer.qnotez.ui;
 
 import android.app.SearchManager;
 import android.arch.lifecycle.LifecycleRegistry;
@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.doomer.qnotez.R;
 import org.doomer.qnotez.adapters.RecyclerViewAdapter;
 import org.doomer.qnotez.db.AppDatabase;
 import org.doomer.qnotez.db.NoteModel;

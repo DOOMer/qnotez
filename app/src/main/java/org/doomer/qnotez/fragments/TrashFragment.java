@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import org.doomer.qnotez.NoteDetailActivity;
+import org.doomer.qnotez.ui.NoteDetailActivity;
 import org.doomer.qnotez.R;
 import org.doomer.qnotez.adapters.RecyclerViewAdapter;
 import org.doomer.qnotez.consts.NoteActions;

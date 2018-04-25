@@ -1,4 +1,4 @@
-package org.doomer.qnotez;
+package org.doomer.qnotez.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import org.doomer.qnotez.R;
 import org.doomer.qnotez.fragments.SettingsFragment;
 import org.doomer.qnotez.utils.ThemeChanger;
 

@@ -1,4 +1,4 @@
-package org.doomer.qnotez;
+package org.doomer.qnotez.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.doomer.qnotez.R;
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.utils.Dialogs;
 import org.doomer.qnotez.viewmodel.NoteAddViewModel;

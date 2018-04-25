@@ -1,4 +1,4 @@
-package org.doomer.qnotez;
+package org.doomer.qnotez.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import org.doomer.qnotez.R;
 import org.doomer.qnotez.utils.ThemeChanger;
 import org.doomer.qnotez.utils.TextUtils;
 

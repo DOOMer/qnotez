@@ -1,4 +1,4 @@
-package org.doomer.qnotez;
+package org.doomer.qnotez.ui;
 
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -27,6 +26,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import org.doomer.qnotez.R;
 import org.doomer.qnotez.consts.NoteActions;
 import org.doomer.qnotez.db.NoteModel;
 import org.doomer.qnotez.utils.ActivityUtils;
@@ -35,7 +35,6 @@ import org.doomer.qnotez.viewmodel.NoteDetailViewModel;
 import org.doomer.qnotez.utils.ThemeChanger;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class NoteDetailActivity extends AppCompatActivity implements LifecycleRegistryOwner {
 

@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +23,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import org.doomer.qnotez.MainActivity;
-import org.doomer.qnotez.NoteDetailActivity;
+import org.doomer.qnotez.ui.NoteDetailActivity;
 import org.doomer.qnotez.R;
 import org.doomer.qnotez.adapters.RecyclerViewAdapter;
 import org.doomer.qnotez.consts.NoteActions;
