@@ -12,6 +12,11 @@ import com.michaelflisar.changelog.ChangelogUtil;
 public class ChangeLog {
     private static final String PREF_KEY = "installedVersion";
 
+    public static void showWFullChangelog(AppCompatActivity activity) {
+        ChangelogBuilder builder = new ChangelogBuilder();
+        builder.buildAndShowDialog(activity, false);
+    }
+
     public static void showWhatsNew(AppCompatActivity activity) {
         int codeSaved = readSavedVersionCode(activity);
 
