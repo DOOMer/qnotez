@@ -27,6 +27,8 @@
     <!-- colors for customize searchview -->
     <color name="search_background_dark">#484848</color>
 
+    <color name="btn_view_changelog">#fad534</color>
+
 </resources>
 
 <!--<resources>-->

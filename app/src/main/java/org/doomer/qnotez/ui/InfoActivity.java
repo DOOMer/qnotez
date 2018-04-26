@@ -2,7 +2,6 @@ package org.doomer.qnotez.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -15,6 +14,7 @@ import butterknife.ButterKnife;
 import org.doomer.qnotez.R;
 import org.doomer.qnotez.utils.ThemeChanger;
 import org.doomer.qnotez.utils.TextUtils;
+import org.doomer.qnotez.utils.ChangeLog;
 
 public class InfoActivity extends AppCompatActivity {
 
@@ -37,8 +37,7 @@ public class InfoActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                ChangeLog.showWFullChangelog(InfoActivity.this);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
