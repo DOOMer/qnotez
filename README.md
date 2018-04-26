@@ -1,5 +1,7 @@
 ## QNotez
 
+![logo](Logo/horizontal.png)
+
 QNotez is a simple note taking application that has open source code and is based on Android Architecture Components.
 
 Main features:
