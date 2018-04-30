@@ -7,8 +7,8 @@ android {
         applicationId "org.doomer.qnotez"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 20000
-        versionName "2.0"
+        versionCode 20001
+        versionName "2.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
 
