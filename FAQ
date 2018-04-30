@@ -1,0 +1,42 @@
+QNotez-Frequently Asked Questions(FAQ)
+
+This "Frequently Asked Questions" document will be updated continually to accomodate new information with respect to new updates and changes on the app and will be used in the app to help users find answers to their questions.
+
+What is QNotez?
+
+QNotez is an open-source note taking application which provides a user with simplicity as well as productivity. This application is built based on Android Architecture Components and comes with a clean materialistic design.
+
+How do I make a note?
+
+Upon opening the app, this can be done by tapping the "+" button at the bottom right corner of the page.
+
+How do I delete a note?
+
+By tapping and holding on the note till a menu comes up and selecting the delete action.
+
+How do I edit a note?
+
+This can be done by tapping and holding a note followed by selecting the "view or edit note" action or by simply tapping a note.
+
+Can I share a note?
+
+Yes. This can be done by tapping and holding the note followed by selecting the "share" action.
+
+How do I search for a note?
+
+This can be easily done by using the search tool at the top right corner of the page.
+
+Can I change the theme of the application?
+
+Yes. This can be done by accessing the settings page from the menu at the top left corner of the page.
+
+How do I restore a deleted note?
+
+This can be done by accessing the trash page from the menu at the top left corner of the page followed by tapping and holding the note and selecting the restore option from the pop up menu.
+
+Where can I leave feedbacks or suggestions or report bugs?
+
+You can leave them on our app page on Google Play Store
+Or you can report them directly on:
+
+Our Github issue page - https://github.com/DOOMer/qnotez/issues
