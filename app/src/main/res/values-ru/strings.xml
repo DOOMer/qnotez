@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">QNotez</string>
     <string name="navigation_drawer_open">Открыть панель навигации</string>
     <string name="navigation_drawer_close">Закрыть панель навигации</string>
     <string name="action_search">Поиск</string>
@@ -11,7 +10,7 @@
     <string name="edit_note_title">Заголовок&#8230;</string>
     <string name="edit_note_text">Текст&#8230;</string>
     <string name="warning_emty_text">Поле ввода текста не может быть пустым!</string>
-    <string name="msg_note_saved">Поиск&#8230;</string>
+    <string name="msg_note_saved">Сохранено...</string>
     <string name="msg_warning">Предупреждение</string>
     <string name="msg_yes">Да</string>
     <string name="msg_no">Нет</string>
@@ -31,7 +30,6 @@
     <string name="title_activity_note_detail">Просмотр \\ изменение</string>
     <string name="title_activity_note_detail_ro">Просмотр</string>
     <string name="settings_summary_count_rows">Число отображаемых строк для записи в общем списке</string>
-    <string name="settings_key_count_rows" translatable="false">Число строк предпросмотра</string>
 
     <!-- string for behavior settings -->
     <string name="settings_title_behavior">Поведение</string>
