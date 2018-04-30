@@ -81,7 +81,8 @@ public class NoteDetailActivity extends AppCompatActivity implements LifecycleRe
                             .show();
                 } else {
                     saveNote();
-                    Toast.makeText(NoteDetailActivity.this, "Saved", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteDetailActivity.this,
+                            getString(R.string.msg_note_saved), Toast.LENGTH_LONG).show();
                 }
             }
         });
