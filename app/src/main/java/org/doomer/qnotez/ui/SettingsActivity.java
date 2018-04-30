@@ -1,13 +1,14 @@
 package org.doomer.qnotez.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
 import org.doomer.qnotez.R;
 import org.doomer.qnotez.fragments.SettingsFragment;
+import org.doomer.qnotez.ui.MainActivity;
 import org.doomer.qnotez.utils.ThemeChanger;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -52,7 +53,17 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        MenuItem home = (MenuItem) findViewById(android.R.id.home);
-        onOptionsItemSelected(home);
+
+        if (themeIsChanged || displayedRowsCountCHanged) {
+            themeIsChanged = false;
+            displayedRowsCountCHanged = false;
+
+            Intent toMain = new Intent(SettingsActivity.this, MainActivity.class);
+            startActivity(toMain);
+
+            finish();
+        }
+
+        super.onBackPressed();
     }
 }
