@@ -50,7 +50,7 @@
     <string name="snack_msg_move_to_trash">Перемещено в корзину</string>
     <string name="snack_msg_move_from_trash">Восстановлено из корзины</string>
 
-    <string name="txt_empty_notes_list">Всё ещё нет заметок</string>
+    <string name="txt_empty_notes_list">Нет заметок</string>
     <string name="txt_empty_trash">Пусто!</string>
 
 </resources>
