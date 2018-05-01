@@ -13,6 +13,7 @@ import android.widget.TextView;
 import org.doomer.qnotez.App;
 import org.doomer.qnotez.R;
 import org.doomer.qnotez.db.NoteModel;
+import org.doomer.qnotez.utils.TextUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -74,7 +75,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         // bind values to view in holder
         if (rowCount != 0) {
-            holder.txtText.setText(note.getText());
+            String text = TextUtils.rowsToPreview(rowCount, note.getText());
+            holder.txtText.setText(text);
         }
 
         String title = note.getTitle();

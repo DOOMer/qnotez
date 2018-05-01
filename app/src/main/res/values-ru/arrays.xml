@@ -17,8 +17,11 @@
     </string-array>
 
     <string-array name="settings_display_count_rows_titles">
-        <item>Весь текст</item>
         <item>Только заголовки</item>
+        <item>2 строки</item>
+        <item>5 строк</item>
+        <item>10 строк</item>
+        <item>Весь текст</item>
     </string-array>
 
     <string-array name="settings_back_action_note_edit_titles">
