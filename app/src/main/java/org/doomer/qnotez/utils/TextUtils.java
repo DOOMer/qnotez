@@ -67,15 +67,20 @@ public class TextUtils {
     private static String arrayToString(int count, String array[]) {
         StringBuilder strBuild = new StringBuilder();
 
-        for (int i = 0; i < count; i = i + 1) {
-            strBuild.append(array[i]);
+        if (array.length == 1) {
+            strBuild.append(array[0]);
+        } else {
+            for (int i = 0; i < count; i = i + 1) {
+                strBuild.append(array[i]);
 
-            if (i < count - 1) {
-                strBuild.append(" ||  ");
-                strBuild.append("\n");
-            } else {
-                strBuild.append(" ... ");
+                if (i < count - 1) {
+                    strBuild.append(" ||  ");
+                    strBuild.append("\n");
+                } else {
+                    strBuild.append(" ... ");
+                }
             }
+
         }
 
         String retStr = strBuild.toString();
