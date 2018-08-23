@@ -39,7 +39,7 @@
             "notNull": false
           },
           {
-            "fieldPath": "inTrash",
+            "fieldPath": "isInTrash",
             "columnName": "in_trash",
             "affinity": "INTEGER",
             "notNull": true

@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/settings_title_behavior">
-        <ListPreference android:key="@string/settings_key_back_action_note_edit"
+    <android.support.v7.preference.PreferenceCategory android:title="@string/settings_title_behavior">
+        <android.support.v7.preference.ListPreference android:key="@string/settings_key_back_action_note_edit"
             android:title="@string/settings_title_back_action_note_edit"
             android:summary="@string/settings_summary_back_action_note_edit"
             android:entries="@array/settings_back_action_note_edit_titles"
             android:entryValues="@array/settings_back_action_note_edit_values"
             android:defaultValue="1" />
-    </PreferenceCategory>
+    </android.support.v7.preference.PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_title_display">
-        <SwitchPreference android:key="@string/settings_key_darkskin"
+    <android.support.v7.preference.PreferenceCategory android:title="@string/settings_title_display">
+        <android.support.v7.preference.SwitchPreferenceCompat android:key="@string/settings_key_darkskin"
             android:title="@string/settings_titl_darkskin"
             android:defaultValue="false">
 
-        </SwitchPreference>
-        <ListPreference android:key="@string/settings_key_count_rows"
+        </android.support.v7.preference.SwitchPreferenceCompat>
+        <android.support.v7.preference.ListPreference android:key="@string/settings_key_count_rows"
             android:title="@string/settings_title_count_rows"
             android:summary="@string/settings_summary_count_rows"
             android:entries="@array/settings_display_count_rows_titles"
             android:entryValues="@array/settings_display_count_rows_values"
             android:defaultValue="-1" />
 
-    </PreferenceCategory>
-    <PreferenceCategory android:title="@string/action_search">
-        <ListPreference android:entries="@array/settings_quick_search_titles"
+    </android.support.v7.preference.PreferenceCategory>
+    <android.support.v7.preference.PreferenceCategory android:title="@string/action_search">
+        <android.support.v7.preference.ListPreference android:entries="@array/settings_quick_search_titles"
             android:entryValues="@array/settings_quick_search_values"
             android:title="@string/settings_title_quick_search"
             android:summary="@string/settings_summary_quick_search"
             android:key="@string/settings_key_quick_search"
             android:defaultValue="@string/settings_qs_by_text"/>
-    </PreferenceCategory>
-</PreferenceScreen>
+    </android.support.v7.preference.PreferenceCategory>
+</android.support.v7.preference.PreferenceScreen>
