@@ -12,7 +12,7 @@
 
     <EditText
         android:id="@+id/edit_title"
-        android:layout_width="352dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -26,8 +26,8 @@
 
     <EditText
         android:id="@+id/edit_text"
-        android:layout_width="354dp"
-        android:layout_height="388dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -36,23 +36,22 @@
         android:gravity="top"
         android:hint="@string/edit_note_text"
         android:inputType="textMultiLine|textAutoCorrect"
-        app:layout_constraintBottom_toTopOf="@+id/txt_updated"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_title"
-        tools:layout_editor_absoluteY="49dp" />
+        app:layout_constraintBottom_toTopOf="@+id/text_updated"  />
 
     <TextView
         android:id="@+id/text_updated"
-        android:layout_width="334dp"
-        android:layout_height="44dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:text="TextView"
+        android:text="@string/txt_created"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.529" />
 </android.support.constraint.ConstraintLayout>
