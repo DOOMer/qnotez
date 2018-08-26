@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import org.doomer.qnotez.R
 import org.doomer.qnotez.adapters.RecyclerViewAdapter
 import org.doomer.qnotez.db.NoteModel
+import org.doomer.qnotez.ui.fragments.BackupFragment
 import org.doomer.qnotez.ui.fragments.MainFragment
 import org.doomer.qnotez.ui.fragments.TrashFragment
 import org.doomer.qnotez.viewmodel.NoteListViewModel
@@ -33,6 +34,7 @@ import org.doomer.qnotez.utils.ActivityUtils
 import org.doomer.qnotez.utils.ThemeChanger
 
 import org.doomer.qnotez.utils.ChangeLog
+import org.doomer.qnotez.utils.hideKeyboard
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnQueryTextListener, OnCloseListener, LifecycleRegistryOwner {
@@ -162,6 +164,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(navIntent)
             }
 
+            R.id.nav_backup -> {
+                curFragmentTag = BackupFragment.FRAGMENT_TAG
+                search_view.visibility = View.GONE
+                search_view.hideKeyboard()
+                ActivityUtils.changeFragment(this, R.id.main_content, BackupFragment.FRAGMENT_TAG)
+                showFab(false)
+            }
+
             else -> {
                 navIntent = Intent(this@MainActivity, InfoActivity::class.java)
                 startActivity(navIntent)
@@ -184,7 +194,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (curFragmentTag == TrashFragment.FRAGMENT_TAG) {
             val frg = supportFragmentManager.findFragmentByTag(curFragmentTag) as TrashFragment
             frg.quickSearch(newText)
-        } else {
+        } else if (curFragmentTag == MainFragment.FRAGMENT_TAG) {
             val frg = supportFragmentManager.findFragmentByTag(curFragmentTag) as MainFragment
             frg.quickSearch(newText)
         }

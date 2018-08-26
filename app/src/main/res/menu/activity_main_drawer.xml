@@ -15,6 +15,12 @@
             android:title="@string/nav_list_trash" android:checkable="false" />
 
     </group>
+    <group android:checkableBehavior="single" android:id="@+id/nav_group_backup">
+        <item
+            android:id="@+id/nav_backup"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/txt_backup_title" android:checkable="false" />
+    </group>
     <group android:checkableBehavior="single" android:id="@+id/nav_group_settings">
         <item
             android:id="@+id/nav_settings"

@@ -6,10 +6,12 @@ import android.preference.PreferenceManager
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.inputmethod.InputMethodManager
 import android.view.View
 import android.widget.Toast
 
 import org.doomer.qnotez.R
+import org.doomer.qnotez.ui.fragments.BackupFragment
 import org.doomer.qnotez.ui.fragments.MainFragment
 import org.doomer.qnotez.ui.fragments.TrashFragment
 
@@ -35,6 +37,8 @@ object ActivityUtils {
 
         if (tag == TrashFragment.FRAGMENT_TAG) {
             frg = TrashFragment()
+        } else if (tag == BackupFragment.FRAGMENT_TAG) {
+            frg = BackupFragment()
         } else {
             frg = MainFragment()
         }
@@ -53,6 +57,11 @@ fun Activity.showMessageSnack(view : View, msg : String) {
 
 fun Activity.showMessageToast(msg : String) {
     Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+}
+
+fun View.hideKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(windowToken, 0)
 }
 
 

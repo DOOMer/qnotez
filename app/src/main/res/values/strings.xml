@@ -73,4 +73,13 @@
 
     <string name="txt_empty_notes_list">No notes yet</string>
     <string name="txt_empty_trash">Empty!</string>
+
+    <string name="txt_backup_title">Backup</string>
+    <string name="txt_backup_info">
+        Save or load backups for you notes.
+    </string>
+
+    <string name="txt_backup_load">Load backup</string>
+    <string name="txt_backup_save">Save backup</string>
+
 </resources>
