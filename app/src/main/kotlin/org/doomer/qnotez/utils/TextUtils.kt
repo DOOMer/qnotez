@@ -40,6 +40,11 @@ object TextUtils {
             return sdf.format(buildDate)
         }
 
+    fun filenameForBackup() : String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd--k-mm-ss")
+        return "qnotez-backup-" + sdf.format(Date()) + ".json"
+    }
+
     fun prepareToLikeQuery(text: String): String {
         return "%$text%"
     }

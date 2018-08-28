@@ -39,4 +39,7 @@ interface NoteDao {
 
     @Delete
     fun deleteItem(item: NoteModel)
+
+    @get:Query("SELECT * FROM " + TABLE_NOTES + " ORDER BY id ASC")
+    val backupItems : List<NoteModel>
 }

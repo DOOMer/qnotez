@@ -76,10 +76,12 @@
 
     <string name="txt_backup_title">Backup</string>
     <string name="txt_backup_info">
-        Save or load backups for you notes.
+        Save or load backups for your notes.
     </string>
 
     <string name="txt_backup_load">Load backup</string>
     <string name="txt_backup_save">Save backup</string>
+    <string name="txt_notes_count">Notes count</string>
+    <string name="txt_backup_date">Backup date</string>
 
 </resources>

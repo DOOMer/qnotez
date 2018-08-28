@@ -53,4 +53,14 @@
     <string name="txt_empty_notes_list">Нет заметок</string>
     <string name="txt_empty_trash">Пусто!</string>
 
+    <string name="txt_backup_title">Резервная копия</string>
+    <string name="txt_backup_info">
+        Сохранение и загрузка резервной копии ваших заметок.
+    </string>
+
+    <string name="txt_backup_load">Загрузка рез. копии</string>
+    <string name="txt_backup_save">Сохранение рез. копии</string>
+    <string name="txt_notes_count">Количество заметок</string>
+    <string name="txt_backup_date">Дата резервирования</string>
+
 </resources>

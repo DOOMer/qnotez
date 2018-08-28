@@ -17,6 +17,5 @@ data class NoteModel(@PrimaryKey(autoGenerate = true) var id: Int = 0,
 ) {
     init {
         this.updated = this.created
-        this.isInTrash = false
     }
 }
