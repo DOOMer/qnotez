@@ -4,7 +4,7 @@
     <style name="AppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorPrimaryDark">@color/secondaryDarkColor</item>
         <item name="colorAccent">@color/primaryDarkColor</item>
 
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
