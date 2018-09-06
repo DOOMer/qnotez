@@ -1,9 +1,6 @@
 package org.doomer.qnotez.utils
 
-import android.content.Context
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.util.Log
 
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -53,7 +50,7 @@ object TextUtils {
     fun rowsToPreview(count: Int, text: String): String {
         var retStr = String()
         val lines = text.split("\\n".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
-Log.d("QQQQ", count.toString())
+
         when (count) {
             2 -> retStr = arrayToString(2, lines)
             5 -> retStr = arrayToString(5, lines)
@@ -89,8 +86,6 @@ Log.d("QQQQ", count.toString())
                 }
             }
         }
-
-
 
         return strBuild.toString()
     }
