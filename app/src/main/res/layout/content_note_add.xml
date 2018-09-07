@@ -50,6 +50,7 @@
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:text="@string/txt_created"
+        android:singleLine="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

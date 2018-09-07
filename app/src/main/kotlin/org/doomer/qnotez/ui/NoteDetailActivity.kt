@@ -5,6 +5,7 @@ import android.arch.lifecycle.LifecycleRegistryOwner
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
@@ -129,7 +130,11 @@ class NoteDetailActivity : AppCompatActivity(), LifecycleRegistryOwner {
                 var dateString = getString(R.string.txt_created) + " " + createdString
 
                 if (noteModel.created != noteModel.updated) {
-                    dateString += "\n" + getString(R.string.txt_updated) + " " + updatedString
+                    if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        dateString += "\n" + getString(R.string.txt_updated) + " " + updatedString
+                    } else {
+                        dateString += ", " + getString(R.string.txt_updated).toLowerCase() + " " + updatedString
+                    }
                 }
 
                 text_updated.text = dateString

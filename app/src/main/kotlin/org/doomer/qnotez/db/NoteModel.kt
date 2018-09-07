@@ -14,8 +14,4 @@ data class NoteModel(@PrimaryKey(autoGenerate = true) var id: Int = 0,
                      @field:TypeConverters(DateConverter::class) var created: Date? = Date(),
                      @field:TypeConverters(DateConverter::class) var updated: Date? = null,
                      @ColumnInfo(name = COL_TRASH) var isInTrash: Boolean = false
-) {
-    init {
-        this.updated = this.created
-    }
-}
+)
