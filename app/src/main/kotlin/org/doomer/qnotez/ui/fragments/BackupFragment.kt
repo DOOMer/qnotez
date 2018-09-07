@@ -1,11 +1,15 @@
 package org.doomer.qnotez.ui.fragments
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.DocumentsContract
+import android.provider.Settings
 import android.support.v4.app.Fragment
 import android.view.*
 
@@ -16,8 +20,6 @@ import kotlinx.android.synthetic.main.fragment_backup.*
 
 import org.doomer.qnotez.R
 import org.doomer.qnotez.db.NoteDao
-
-import android.provider.DocumentsContract
 import org.doomer.qnotez.utils.*
 
 
@@ -28,11 +30,15 @@ class BackupFragment : Fragment() {
 
         // simply dirty hack for prevent erase log when user has rotated the screen
         private var log : String = ""
+
+        val PERMISSIONS_STORAGE = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     private val READ_REQUEST_CODE = 42
     private val CREATE_REQUEST_CODE = 43
     private val WRITE_REQUEST_CODE = 44
+    private val PERMISSION_STORAGE_CODE = 111
 
     @Inject
     lateinit var notes : NoteDao
@@ -65,7 +71,21 @@ class BackupFragment : Fragment() {
         btn_backup_load.setOnClickListener { openBackupFile() }
         btn_backup_save.setOnClickListener { saveBackupFile() }
 
-        text_backup_log.text = log
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            btn_backup_permissions.setOnClickListener {
+                if (isDisplayPermissionsRequest()) {
+                    requestStoragePermissions()
+                } else {
+                    openAppSettings()
+                }
+            }
+
+//        text_backup_log.text = log
+
+            checkStoragePermissions()
+        } else {
+            enableBackup(true)
+        }
     }
 
     private fun openBackupFile() {
@@ -153,8 +173,6 @@ class BackupFragment : Fragment() {
             IOUtils.writeText(contentResolver, saveDir, jsonStr)
             displayBackupInfo(bt.info)
         }
-
-
     }
 
     private fun displayBackupInfo(info: BackupInfo) {
@@ -173,4 +191,76 @@ class BackupFragment : Fragment() {
         log = str
         text_backup_log.text = str
     }
+
+    private fun checkStoragePermissions() {
+        if (!isPermissionGranted(Manifest.permission.READ_EXTERNAL_STORAGE) ||
+                !isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+            enableBackup(false)
+            requestStoragePermissions()
+
+        } else {
+            // enable buttons
+            enableBackup(true)
+        }
+    }
+
+    private fun enableBackup(enabled : Boolean) {
+        if (enabled) {
+            btn_backup_save.visibility = View.VISIBLE
+            btn_backup_load.visibility = View.VISIBLE
+            btn_backup_permissions.visibility = View.GONE
+            log = ""
+        } else {
+            btn_backup_save.visibility = View.INVISIBLE
+            btn_backup_load.visibility = View.INVISIBLE
+            btn_backup_permissions.visibility = View.VISIBLE
+            log = getString(R.string.txt_storage_perms_deny)
+        }
+        text_backup_log.text = log
+    }
+
+    fun openAppSettings() {
+        val appSettingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.parse("package:" + activity!!.packageName))
+        startActivityForResult(appSettingsIntent, PERMISSION_STORAGE_CODE)
+    }
+
+    private fun isDisplayPermissionsRequest() =
+            shouldShowPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) ||
+                    shouldShowPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+    private fun requestStoragePermissions() {
+        if (isDisplayPermissionsRequest()) {
+            // Provide an additional rationale to the user if the permission was not granted
+            // and the user would benefit from additional context for the use of the permission.
+            // For example, if the request has been denied previously.
+            requestPermissions(PERMISSIONS_STORAGE, PERMISSION_STORAGE_CODE)
+            enableBackup(false)
+
+        } else {
+            // Storage permissions have not been granted yet. Request them directly.
+            requestPermissions(PERMISSIONS_STORAGE, PERMISSION_STORAGE_CODE)
+            enableBackup(false)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<out String>,
+                                            grantResults: IntArray) {
+
+        if (requestCode == PERMISSION_STORAGE_CODE ) {
+            if (grantResults.containsOnly(PackageManager.PERMISSION_GRANTED)) {
+                enableBackup(true)
+            } else {
+                enableBackup(false)
+            }
+
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
+
+    }
 }
+
+

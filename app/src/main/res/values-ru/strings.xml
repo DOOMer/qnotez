@@ -63,4 +63,9 @@
     <string name="txt_notes_count">Количество заметок</string>
     <string name="txt_backup_date">Дата резервирования</string>
 
+    <string name="txt_storage_perms_deny">
+        Для работы с резервными копиями необходимы права на чтение и запись во внешнее ранилище данных.
+    </string>
+    <string name="txt_backup_permissions">Дать разрешения</string>
+
 </resources>

@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_backup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -48,5 +49,15 @@
         android:singleLine="false"
         android:layout_marginStart="@dimen/margin_full_width_textview"
         android:layout_marginEnd="@dimen/margin_full_width_textview" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_backup_permissions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_backup_log"
+        android:text="@string/txt_backup_permissions"
+        android:textAllCaps="false" />
 
 </android.support.constraint.ConstraintLayout>

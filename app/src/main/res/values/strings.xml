@@ -83,5 +83,9 @@
     <string name="txt_backup_save">Save backup</string>
     <string name="txt_notes_count">Notes count</string>
     <string name="txt_backup_date">Backup date</string>
+    <string name="txt_storage_perms_deny">
+        For work with backups, you must have permissions for read and write  on the external storage.
+    </string>
+    <string name="txt_backup_permissions">Enable permissions</string>
 
 </resources>
