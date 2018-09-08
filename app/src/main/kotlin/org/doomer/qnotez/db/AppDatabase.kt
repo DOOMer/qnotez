@@ -21,37 +21,3 @@ abstract class AppDatabase : RoomDatabase() {
     }
 }
 
-
-//@Database(entities = arrayOf(NoteModel::class), version = 2)
-//abstract class AppDatabase : RoomDatabase() {
-//
-//    abstract val noteModel: NoteDao
-//
-//    companion object {
-//
-//        private var INSTANCE: AppDatabase? = null
-//        val DB_NAME = "qnotez.db3"
-//
-//        fun getDatabase(context: Context): AppDatabase {
-//            if (INSTANCE == null) {
-//                INSTANCE = Room.databaseBuilder<AppDatabase>(
-//                        context.applicationContext, AppDatabase::class.java!!, DB_NAME
-//                ).addMigrations(AppDatabase.MIGRATION_1_2).build()
-//            }
-//
-//            return INSTANCE
-//        }
-//
-//        fun destroyInstance() {
-//            INSTANCE = null
-//        }
-//
-//        val MIGRATION_1_2: Migration = object : Migration(1, 2) {
-//
-//            override fun migrate(database: SupportSQLiteDatabase) {
-//                database.execSQL("ALTER TABLE " + NoteModel.TABLE_NAME + " ADD COLUMN " + NoteModel.COL_TRASH + " INTEGER DEFAULT 0 NOT NULL")
-//
-//            }
-//        }
-//    }
-//}
