@@ -84,6 +84,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             curFragmentTag = MainFragment.FRAGMENT_TAG
         }
         ActivityUtils.changeFragment(this, R.id.main_content, curFragmentTag!!)
+        
+        if (curFragmentTag != MainFragment.FRAGMENT_TAG) showFab(false)
 
         ChangeLog.showWhatsNew(this)
     }
