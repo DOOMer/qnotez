@@ -41,12 +41,16 @@ class NoteListViewModel @Inject constructor(private val db : AppDatabase) : View
         try {
             noteItems = searchTask.execute(text, inTrashStr).get()
         } catch (e: InterruptedException) {
-            Log.d("SSSSS", "INTERRUPT EXCEPTION")
+            Log.d("QNotez::QSearch", "INTERRUPT EXCEPTION")
         } catch (e: ExecutionException) {
-            Log.d("SSSSS", "EXECUTE EXCEPTION")
+            Log.d("QNotez::QSearch", "EXECUTE EXCEPTION")
         }
 
         return noteItems
+    }
+
+    fun addItem(item: NoteModel) {
+        NoteUtils.NoteAddAsyncTask(db).execute(item)
     }
 
     fun deleteItem(item: NoteModel) {
@@ -67,68 +71,21 @@ class NoteListViewModel @Inject constructor(private val db : AppDatabase) : View
         item.isInTrash = false
         NoteUtils.NoteUpdateAsyncTask(db).execute(item)
     }
+
+    fun notesForBackup() : List<NoteModel> {
+        val searchTask = NoteUtils.BackupAsyncTask(db)
+
+        var backupItems : List<NoteModel> = mutableListOf()
+        try {
+             backupItems = searchTask.execute("").get()
+        } catch (e: InterruptedException) {
+            Log.d("QNotez::QBackup", "INTERRUPT EXCEPTION")
+        } catch (e: ExecutionException) {
+            Log.d("QNotez::QBackup", "EXECUTE EXCEPTION")
+        }
+
+        return backupItems
+    }
 }
 
-//class NoteListViewModel(application: Application) : AndroidViewModel(application) {
-//
-//    private var noteItems: LiveData<List<NoteModel>>? = null
-//    //    private MutableLiveData<List<NoteModel>> noteItems = new MutableLiveData<>();
-//    protected var database: AppDatabase
-//    private var showInTrash = false
-//
-//    init {
-//
-//        database = AppDatabase.getDatabase(this.getApplication())
-//        noteItems = database.noteModel.allItems
-//
-//        //        noteItems.setValue(database.getNoteModel().getAllItems().getValue());
-//    }
-//
-//    fun getNoteItems(): LiveData<List<NoteModel>>? {
-//
-//        if (!showInTrash) {
-//            noteItems = database.noteModel.allItems
-//        } else {
-//            noteItems = database.noteModel.allItemsInTrahs
-//        }
-//
-//        return noteItems
-//    }
-//
-//    fun quickSearch(text: String, inTrash: Boolean): LiveData<List<NoteModel>>? {
-//        var text = text
-//        text = TextUtils.prepareToLikeQuery(text)
-//
-//        val inTrashStr = if (inTrash) "1" else "0"
-//        val searchTask = NoteUtils.SearchAsyncTask(database)
-//
-//        try {
-//            noteItems = searchTask.execute(text, inTrashStr).get()
-//        } catch (e: InterruptedException) {
-//            Log.d("SSSSS", "INTERRUPT EXCEPTION")
-//        } catch (e: ExecutionException) {
-//            Log.d("SSSSS", "EXECUTE EXCEPTION")
-//        }
-//
-//        return noteItems
-//    }
-//
-//    fun deleteItem(item: NoteModel) {
-//        NoteUtils.NoteDeleteAsyncTask(database).execute(item)
-//    }
-//
-//
-//    fun setShowTrash(trashVisible: Boolean) {
-//        showInTrash = trashVisible
-//    }
-//
-//    fun moveToTrash(item: NoteModel) {
-//        item.isInTrash = true
-//        NoteUtils.NoteUpdateAsyncTask(database).execute(item)
-//    }
-//
-//    fun moveFromTrash(item: NoteModel) {
-//        item.isInTrash = false
-//        NoteUtils.NoteUpdateAsyncTask(database).execute(item)
-//    }
-//}
+

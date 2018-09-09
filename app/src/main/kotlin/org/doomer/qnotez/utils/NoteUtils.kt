@@ -45,6 +45,7 @@ object NoteUtils {
         context.startActivity(Intent.createChooser(inShare, context.getString(R.string.action_item_share_chooser)))
     }
 
+    // TODO - replace to corutnes
     class NoteAddAsyncTask(private val db: AppDatabase) : AsyncTask<NoteModel, Void, Void>() {
 
         override fun doInBackground(vararg noteModels: NoteModel): Void? {
@@ -53,6 +54,7 @@ object NoteUtils {
         }
     }
 
+    // TODO - replace to corutnes
     class NoteUpdateAsyncTask(private val db: AppDatabase) : AsyncTask<NoteModel, Void, Void>() {
 
         override fun doInBackground(vararg noteModels: NoteModel): Void? {
@@ -61,6 +63,7 @@ object NoteUtils {
         }
     }
 
+    // TODO - replace to corutnes
     class NoteDeleteAsyncTask(private val db: AppDatabase) : AsyncTask<NoteModel, Void, Void>() {
 
         override fun doInBackground(vararg noteModels: NoteModel): Void? {
@@ -69,6 +72,7 @@ object NoteUtils {
         }
     }
 
+    // TODO - replace to corutnes
     class SearchAsyncTask(private val db: AppDatabase) : AsyncTask<String, Void, LiveData<List<NoteModel>>>() {
 
         override fun doInBackground(vararg strings: String): LiveData<List<NoteModel>> {
@@ -80,6 +84,14 @@ object NoteUtils {
             }
 
             return searchedItems
+        }
+    }
+
+    // TODO - replace to corutnes
+    class BackupAsyncTask(private val db: AppDatabase) : AsyncTask<String, Void, List<NoteModel>>() {
+
+        override fun doInBackground(vararg strings: String): List<NoteModel> {
+            return db.noteModel().backupItems
         }
     }
 }

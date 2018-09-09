@@ -2,6 +2,7 @@ package org.doomer.qnotez.ui.fragments
 
 import android.Manifest
 import android.app.Activity
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -21,6 +22,8 @@ import kotlinx.android.synthetic.main.fragment_backup.*
 import org.doomer.qnotez.R
 import org.doomer.qnotez.db.NoteDao
 import org.doomer.qnotez.utils.*
+import org.doomer.qnotez.viewmodel.NoteListViewModel
+import org.doomer.qnotez.viewmodel.ViewModelFactory
 
 
 class BackupFragment : Fragment() {
@@ -40,8 +43,13 @@ class BackupFragment : Fragment() {
     private val WRITE_REQUEST_CODE = 44
     private val PERMISSION_STORAGE_CODE = 111
 
+//    @Inject
+//    lateinit var notes : NoteDao
+
     @Inject
-    lateinit var notes : NoteDao
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private var viewModel: NoteListViewModel? = null
 
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
@@ -80,12 +88,13 @@ class BackupFragment : Fragment() {
                 }
             }
 
-//        text_backup_log.text = log
-
             checkStoragePermissions()
         } else {
             enableBackup(true)
         }
+
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory)
+                .get(NoteListViewModel::class.java)
     }
 
     private fun openBackupFile() {
@@ -141,7 +150,8 @@ class BackupFragment : Fragment() {
 
         parsedNotes?.let {
             for (note in it) {
-                notes.addItem(note)
+//                notes.addItem(note)
+                viewModel!!.addItem(note)
             }
         }
 
@@ -161,14 +171,14 @@ class BackupFragment : Fragment() {
                             TextUtils.filenameForBackup() )
 
             val bt : BackupTool = BackupTool()
-            val jsonStr = bt.prepareData(notes.backupItems)
+            val jsonStr = bt.prepareData(viewModel!!.notesForBackup())
 
             IOUtils.writeText(contentResolver, fileUri, jsonStr)
             displayBackupInfo(bt.info)
         } else { // android 4.4
 
             val bt : BackupTool = BackupTool()
-            val jsonStr = bt.prepareData(notes.backupItems)
+            val jsonStr = bt.prepareData(viewModel!!.notesForBackup())
 
             IOUtils.writeText(contentResolver, saveDir, jsonStr)
             displayBackupInfo(bt.info)
