@@ -60,7 +60,9 @@ class RecyclerViewAdapter(private var noteModelList: List<NoteModel>,
         holder.item_title.text = title
 
         val sdf = SimpleDateFormat("dd MMM yyyy k:mm")
-        val createdString = sdf.format(note.updated)
+
+        var createdString = sdf.format(note.created)
+        note.updated?.let { createdString = sdf.format(note.updated) }
 
         holder.item_updated.text = createdString
 

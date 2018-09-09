@@ -12,6 +12,7 @@ import org.doomer.qnotez.utils.NoteUtils
 class NoteAddViewModel @Inject constructor(private val db : AppDatabase) : ViewModel() {
 
     fun addNote(item: NoteModel) {
+        item.updated = item.created
         NoteUtils.NoteAddAsyncTask(db).execute(item)
     }
 }

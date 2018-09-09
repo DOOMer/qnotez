@@ -125,7 +125,8 @@ class NoteDetailActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
                 val sdf = SimpleDateFormat("dd MMM yyyy k:mm")
                 val createdString = sdf.format(noteModel.created)
-                val updatedString = sdf.format(noteModel.updated)
+                var updatedString = String()
+                noteModel.updated?.let { updatedString = sdf.format(noteModel.updated) }
 
                 var dateString = getString(R.string.txt_created) + " " + createdString
 
