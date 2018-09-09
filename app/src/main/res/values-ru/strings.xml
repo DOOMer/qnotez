@@ -68,4 +68,9 @@
     </string>
     <string name="txt_backup_permissions">Дать разрешения</string>
 
+    <string name="msg_empty_backup_save_empty">Нечего сохранять. У вас не заметок!</string>
+    <string name="msg_empty_backup_load_empty">Нечего восстанавливать. Выбранный файл несодержит заметок !</string>
+    <string name="msg_empty_backup_load_ok">Резервная копия загружена!</string>
+    <string name="msg_empty_backup_save_ok">Резервная копия сохранена!</string>
+
 </resources>

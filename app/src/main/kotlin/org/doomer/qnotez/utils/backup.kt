@@ -33,6 +33,8 @@ data class NoteBackup(@SerialName("version") var backupVersion : Int= BACLUP_VER
 class BackupTool {
     var info : BackupInfo = BackupInfo()
 
+    fun isEmpty() : Boolean = info.itemsCount == 0
+
     fun prepareData(data : List<NoteModel>?) : String {
         val items : MutableList<NoteItemBackup> = mutableListOf()
 

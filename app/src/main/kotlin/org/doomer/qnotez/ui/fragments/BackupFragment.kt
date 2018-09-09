@@ -20,7 +20,6 @@ import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_backup.*
 
 import org.doomer.qnotez.R
-import org.doomer.qnotez.db.NoteDao
 import org.doomer.qnotez.utils.*
 import org.doomer.qnotez.viewmodel.NoteListViewModel
 import org.doomer.qnotez.viewmodel.ViewModelFactory
@@ -107,18 +106,24 @@ class BackupFragment : Fragment() {
 
     private fun saveBackupFile() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val inSave = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+        if (viewModel!!.notesForBackup().isNotEmpty()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                val inSave = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
 
-            startActivityForResult(inSave, CREATE_REQUEST_CODE)
-        } else { // Android 4.4
-            val inSave = Intent(Intent.ACTION_CREATE_DOCUMENT)
-            inSave.addCategory(Intent.CATEGORY_OPENABLE)
-            inSave.type = "text/plain"
-            inSave.putExtra(Intent.EXTRA_TITLE, "qnotez-backup.json")
+                startActivityForResult(inSave, CREATE_REQUEST_CODE)
+            } else { // Android 4.4
+                val inSave = Intent(Intent.ACTION_CREATE_DOCUMENT)
+                inSave.addCategory(Intent.CATEGORY_OPENABLE)
+                inSave.type = "text/plain"
+                inSave.putExtra(Intent.EXTRA_TITLE, "qnotez-backup.json")
 
-            startActivityForResult(inSave, CREATE_REQUEST_CODE)
+                startActivityForResult(inSave, CREATE_REQUEST_CODE)
+            }
+        } else {
+            activity!!.showMessageSnack(layout_backup, getString(R.string.msg_empty_backup_save_empty))
         }
+
+
 
     }
 
@@ -148,14 +153,17 @@ class BackupFragment : Fragment() {
         val bt : BackupTool = BackupTool()
         val parsedNotes = bt.parseData(jsonData)
 
-        parsedNotes?.let {
-            for (note in it) {
-//                notes.addItem(note)
-                viewModel!!.addItem(note)
+        if (!bt.isEmpty()) {
+            parsedNotes?.let {
+                for (note in it) {
+                    viewModel!!.addItem(note)
+                }
             }
+            activity!!.showMessageToast(getString(R.string.msg_empty_backup_load_ok))
+            displayBackupInfo(bt.info)
+        } else {
+            activity!!.showMessageSnack(layout_backup, getString(R.string.msg_empty_backup_load_empty))
         }
-
-        displayBackupInfo(bt.info)
     }
 
     private fun writeToFile(saveDir : Uri) {
@@ -174,6 +182,7 @@ class BackupFragment : Fragment() {
             val jsonStr = bt.prepareData(viewModel!!.notesForBackup())
 
             IOUtils.writeText(contentResolver, fileUri, jsonStr)
+            activity!!.showMessageToast(getString(R.string.msg_empty_backup_save_ok))
             displayBackupInfo(bt.info)
         } else { // android 4.4
 
@@ -181,6 +190,7 @@ class BackupFragment : Fragment() {
             val jsonStr = bt.prepareData(viewModel!!.notesForBackup())
 
             IOUtils.writeText(contentResolver, saveDir, jsonStr)
+            activity!!.showMessageToast(getString(R.string.msg_empty_backup_save_ok))
             displayBackupInfo(bt.info)
         }
     }

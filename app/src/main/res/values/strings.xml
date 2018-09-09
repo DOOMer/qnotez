@@ -88,4 +88,9 @@
     </string>
     <string name="txt_backup_permissions">Enable permissions</string>
 
+    <string name="msg_empty_backup_save_empty">Nothing to save. You haven\'t any notes!</string>
+    <string name="msg_empty_backup_load_empty">Nothing to restore. Selected backup is empty!</string>
+    <string name="msg_empty_backup_load_ok">Backup is loaded!</string>
+    <string name="msg_empty_backup_save_ok">Backup is saved!</string>
+
 </resources>
