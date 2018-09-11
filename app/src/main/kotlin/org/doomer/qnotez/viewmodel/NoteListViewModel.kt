@@ -25,7 +25,7 @@ class NoteListViewModel @Inject constructor(private val db : AppDatabase) : View
         if (!showInTrash) {
             noteItems = db.noteModel().allItems
         } else {
-            noteItems = db.noteModel().allItemsInTrahs
+            noteItems = db.noteModel().allItemsInTrash
         }
 
         return noteItems
@@ -58,6 +58,10 @@ class NoteListViewModel @Inject constructor(private val db : AppDatabase) : View
     }
 
 
+    fun cleanTrash() {
+        NoteUtils.CleanTrashAsyncTask(db).execute("")
+    }
+
     fun setShowTrash(trashVisible: Boolean) {
         showInTrash = trashVisible
     }
@@ -85,6 +89,22 @@ class NoteListViewModel @Inject constructor(private val db : AppDatabase) : View
         }
 
         return backupItems
+    }
+
+    fun countInTrash() : Int {
+
+        val countTask = NoteUtils.CountTrashAsyncTask(db)
+
+        var count : Int = 0
+        try {
+            count = countTask.execute("").get()
+        } catch (e: InterruptedException) {
+            Log.d("QNotez::QBackup", "INTERRUPT EXCEPTION")
+        } catch (e: ExecutionException) {
+            Log.d("QNotez::QBackup", "EXECUTE EXCEPTION")
+        }
+
+        return count
     }
 }
 

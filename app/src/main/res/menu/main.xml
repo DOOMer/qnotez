@@ -6,4 +6,10 @@
         android:orderInCategory="100" android:icon="@android:drawable/ic_menu_search"
         android:title="@string/action_search"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_clean_trash"
+        android:orderInCategory="200" android:icon="@android:drawable/ic_menu_delete"
+        android:title="@string/action_clean_trash"
+        app:showAsAction="ifRoom" android:visible="false" />
 </menu>

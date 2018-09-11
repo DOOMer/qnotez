@@ -73,4 +73,10 @@
     <string name="msg_empty_backup_load_ok">Резервная копия загружена!</string>
     <string name="msg_empty_backup_save_ok">Резервная копия сохранена!</string>
 
+    <string name="action_clean_trash">Удалить всё</string>
+    <string name="msg_nothin_to_delete">Нечго удалять, ваша корзина пуста!</string>
+    <string name="msg_deleted_items">Удалено заметок</string>
+    <string name="msg_clean_trash_text">Очищаем корзину?</string>
+
+
 </resources>

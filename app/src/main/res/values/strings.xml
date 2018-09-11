@@ -93,4 +93,9 @@
     <string name="msg_empty_backup_load_ok">Backup is loaded!</string>
     <string name="msg_empty_backup_save_ok">Backup is saved!</string>
 
+    <string name="action_clean_trash">Delete all</string>
+    <string name="msg_nothin_to_delete">Nothing to delete, your trash is empty!</string>
+    <string name="msg_deleted_items">Deleted items</string>
+    <string name="msg_clean_trash_text">You are clean trash?</string>
+
 </resources>

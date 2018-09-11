@@ -13,11 +13,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.view.View.OnClickListener
 import android.view.View.OnLongClickListener
-import android.view.ViewGroup
 
 import dagger.android.support.AndroidSupportInjection
 
@@ -30,6 +28,8 @@ import org.doomer.qnotez.adapters.RecyclerViewAdapter
 import org.doomer.qnotez.consts.NoteActions
 import org.doomer.qnotez.db.NoteModel
 import org.doomer.qnotez.utils.Dialogs
+import org.doomer.qnotez.utils.showMessageSnack
+import org.doomer.qnotez.utils.showMessageToast
 import org.doomer.qnotez.viewmodel.NoteListViewModel
 import org.doomer.qnotez.viewmodel.ViewModelFactory
 
@@ -53,6 +53,32 @@ class TrashFragment : Fragment(), OnClickListener, OnLongClickListener {
         super.onAttach(context)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        super.onPrepareOptionsMenu(menu)
+        val item : MenuItem = menu!!.findItem(R.id.action_clean_trash)
+        item.setVisible(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId) {
+            R.id.action_clean_trash -> {
+                viewModel!!.setShowTrash(true)
+                if (viewModel!!.countInTrash() > 0) {
+                    showDialogForCleanTrash(null)
+                } else {
+                    activity!!.showMessageSnack(recycler_view,
+                            getString(R.string.msg_nothin_to_delete))
+                }
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 
     private val itemSelectCallback = MaterialDialog.ListCallback { dialog, itemView, position, text ->
         when (position) {
@@ -70,6 +96,24 @@ class TrashFragment : Fragment(), OnClickListener, OnLongClickListener {
         recyclerViewAdapter!!.notifyDataSetChanged()
         Snackbar.make(recycler_view, getString(R.string.snack_msg_deleted), Snackbar.LENGTH_LONG)
                 .show()
+    }
+
+    private fun showDialogForCleanTrash(cancelCallback: MaterialDialog.SingleButtonCallback?) {
+        val strIdTitle = R.string.msg_warning
+        val strIdContent = R.string.msg_clean_trash_text
+
+        val itemDelete = Dialogs.createConfirmDialog(context!!,
+                strIdTitle, strIdContent, cleanTrashCallback, cancelCallback)
+        itemDelete.show()
+    }
+
+    private val cleanTrashCallback = MaterialDialog.SingleButtonCallback { dialog, which ->
+
+        val countToDelete = viewModel!!.countInTrash()
+        viewModel!!.cleanTrash()
+
+        recyclerViewAdapter!!.notifyDataSetChanged()
+        activity!!.showMessageToast(getString(R.string.msg_deleted_items) + ": " + countToDelete.toString() )
     }
 
     private val itemDeleteCancelCallback = MaterialDialog.SingleButtonCallback { dialog, which -> recyclerViewAdapter!!.notifyDataSetChanged() }
@@ -96,10 +140,6 @@ class TrashFragment : Fragment(), OnClickListener, OnLongClickListener {
     }
 
     private val noteTouchHelper = ItemTouchHelper(noteTouchCallback)
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_main, container, false)

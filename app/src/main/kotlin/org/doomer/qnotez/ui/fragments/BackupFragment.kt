@@ -42,9 +42,6 @@ class BackupFragment : Fragment() {
     private val WRITE_REQUEST_CODE = 44
     private val PERMISSION_STORAGE_CODE = 111
 
-//    @Inject
-//    lateinit var notes : NoteDao
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 

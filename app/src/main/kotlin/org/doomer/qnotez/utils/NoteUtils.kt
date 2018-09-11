@@ -87,11 +87,28 @@ object NoteUtils {
         }
     }
 
-    // TODO - replace to corutnes
+    // TODO - replace to corutines
     class BackupAsyncTask(private val db: AppDatabase) : AsyncTask<String, Void, List<NoteModel>>() {
 
         override fun doInBackground(vararg strings: String): List<NoteModel> {
             return db.noteModel().backupItems
+        }
+    }
+
+    // TODO - replace to corutines
+    class CountTrashAsyncTask(private val db: AppDatabase) : AsyncTask<String, Void, Int>() {
+
+        override fun doInBackground(vararg strings: String): Int {
+            return db.noteModel().countItemsInTrash
+        }
+    }
+
+    // TODO - replace to corutines
+    class CleanTrashAsyncTask(private val db: AppDatabase) : AsyncTask<String, Void, Void>() {
+
+        override fun doInBackground(vararg strings: String): Void? {
+            db.noteModel().cleanTrash()
+            return null
         }
     }
 }

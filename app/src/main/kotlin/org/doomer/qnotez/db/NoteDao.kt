@@ -18,7 +18,10 @@ interface NoteDao {
     val allItems: LiveData<List<NoteModel>>
 
     @get:Query("SELECT * FROM " + TABLE_NOTES + " WHERE " + COL_TRASH + "=1 ORDER BY updated DESC")
-    val allItemsInTrahs: LiveData<List<NoteModel>>
+    val allItemsInTrash: LiveData<List<NoteModel>>
+
+    @get:Query("SELECT count(*) FROM " + TABLE_NOTES + " WHERE " + COL_TRASH + "=1")
+    val countItemsInTrash: Int
 
     @Query("SELECT * FROM " + TABLE_NOTES + " WHERE " + COL_TRASH +
             "=:inTrash AND title LIKE :text ORDER BY updated DESC")
@@ -39,6 +42,9 @@ interface NoteDao {
 
     @Delete
     fun deleteItem(item: NoteModel)
+
+    @Query("DELETE FROM " + TABLE_NOTES + " WHERE " + COL_TRASH + "=1")
+    fun cleanTrash()
 
     @get:Query("SELECT * FROM " + TABLE_NOTES + " ORDER BY id ASC")
     val backupItems : List<NoteModel>
