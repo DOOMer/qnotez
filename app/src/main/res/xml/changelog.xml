@@ -1,4 +1,25 @@
 <changelog>
+    <release versionCode="30000" versionName="v3.0.0" date="15 Sep 2018">
+        <info>
+            Source code rewritten from Java to Kotlin.
+        </info>
+        <new>
+            Added the ability to save and restore a backup of all notes.
+        </new>
+        <new>
+            Added a choice to display the first few lines in the notes list (2, 5 or 10 lines).
+        </new>
+        <new>
+            Added the ability to quickly remove all notes from the trash.
+        </new>
+        <bugfix>
+            Small improvement user interface in the note add/edit screens.
+        </bugfix>
+        <bugfix>
+            Small improvement light design theme.
+        </bugfix>
+
+    </release>
     <release versionCode="20001" versionName="v2.0.1" date="30 Apr 2018">
         <bugfix>
             Fixed app icon for Android 8.0 + - based devices
